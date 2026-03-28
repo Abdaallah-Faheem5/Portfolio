@@ -32,6 +32,14 @@
   will-change: transform;
 }
 
+.hero-3d-mobile {
+  display: none;
+}
+
+.hero-3d-desktop {
+  display: block;
+}
+
 .scene-core {
   position: absolute;
   inset: 35%;
@@ -494,7 +502,7 @@
 }
 
 @media (max-width: 1080px) {
-  .hero-3d-scene {
+  .hero-3d-desktop {
     right: clamp(6px, 2vw, 28px);
     width: min(40vw, 430px);
     opacity: 0.66;
@@ -528,7 +536,12 @@
     margin: 0 auto;
   }
 
-  .hero-3d-scene {
+  .hero-3d-desktop {
+    display: none;
+  }
+
+  .hero-3d-mobile {
+    display: block;
     position: relative;
     order: 3;
     z-index: 2;
@@ -611,7 +624,7 @@
     padding-top: 0;
   }
 
-  .hero-3d-scene {
+  .hero-3d-mobile {
     top: auto;
     width: clamp(200px, 78vw, 310px);
     opacity: 0.86;

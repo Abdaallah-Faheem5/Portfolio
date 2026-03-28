@@ -182,6 +182,23 @@ export default function Hero() {
     <section id="hero" className="hero" ref={heroRef}>
       <canvas ref={canvasRef} className="hero-canvas" />
 
+      <div className="hero-3d-scene hero-3d-desktop" aria-hidden="true">
+        <div className="scene-ring scene-ring-1" />
+        <div className="scene-ring scene-ring-2" />
+        <div className="scene-ring scene-ring-3" />
+        <div className="scene-core" />
+
+        <div className="scene-cube">
+          <span className="cube-face cube-front">JS</span>
+          <span className="cube-face cube-back">API</span>
+          <span className="cube-face cube-right">UI</span>
+          <span className="cube-face cube-left">DB</span>
+          <span className="cube-face cube-top">NODE</span>
+          <span className="cube-face cube-bottom">REACT</span>
+        </div>
+
+      </div>
+
       <div className="hero-content">
         <div className="hero-code-column">
           <div className="hero-code">
@@ -202,7 +219,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="hero-3d-scene" aria-hidden="true">
+        <div className="hero-3d-scene hero-3d-mobile" aria-hidden="true">
           <div className="scene-ring scene-ring-1" />
           <div className="scene-ring scene-ring-2" />
           <div className="scene-ring scene-ring-3" />
