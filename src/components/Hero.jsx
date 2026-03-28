@@ -174,8 +174,7 @@ export default function Hero() {
           <span className="cube-face cube-bottom">REACT</span>
         </div>
 
-        <span className="scene-chip chip-2">Node.js</span>
-        <span className="scene-chip chip-3">MongoDB</span>
+       
       </div>
 
       <div className="hero-content">
