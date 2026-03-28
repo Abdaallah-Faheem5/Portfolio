@@ -119,13 +119,25 @@ export default function Hero() {
     const hero = heroRef.current;
     if (!hero) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+    const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
-    const handleMove = (event) => {
+    const updateDepth = (clientX, clientY) => {
       const rect = hero.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width - 0.5;
-      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      const x = clamp((clientX - rect.left) / rect.width - 0.5, -0.5, 0.5);
+      const y = clamp((clientY - rect.top) / rect.height - 0.5, -0.5, 0.5);
       hero.style.setProperty('--mx', x.toFixed(3));
       hero.style.setProperty('--my', y.toFixed(3));
+    };
+
+    const handleMove = (event) => {
+      updateDepth(event.clientX, event.clientY);
+    };
+
+    const handleTouchMove = (event) => {
+      const touch = event.touches[0];
+      if (!touch) return;
+      updateDepth(touch.clientX, touch.clientY);
     };
 
     const reset = () => {
@@ -133,10 +145,21 @@ export default function Hero() {
       hero.style.setProperty('--my', '0');
     };
 
+    if (isTouchDevice) {
+      hero.style.setProperty('--mx', '0.08');
+      hero.style.setProperty('--my', '-0.06');
+      hero.addEventListener('touchmove', handleTouchMove, { passive: true });
+      hero.addEventListener('touchend', reset);
+    }
+
     hero.addEventListener('pointermove', handleMove);
     hero.addEventListener('pointerleave', reset);
 
     return () => {
+      if (isTouchDevice) {
+        hero.removeEventListener('touchmove', handleTouchMove);
+        hero.removeEventListener('touchend', reset);
+      }
       hero.removeEventListener('pointermove', handleMove);
       hero.removeEventListener('pointerleave', reset);
     };
@@ -159,24 +182,6 @@ export default function Hero() {
     <section id="hero" className="hero" ref={heroRef}>
       <canvas ref={canvasRef} className="hero-canvas" />
 
-      <div className="hero-3d-scene" aria-hidden="true">
-        <div className="scene-ring scene-ring-1" />
-        <div className="scene-ring scene-ring-2" />
-        <div className="scene-ring scene-ring-3" />
-        <div className="scene-core" />
-
-        <div className="scene-cube">
-          <span className="cube-face cube-front">JS</span>
-          <span className="cube-face cube-back">API</span>
-          <span className="cube-face cube-right">UI</span>
-          <span className="cube-face cube-left">DB</span>
-          <span className="cube-face cube-top">NODE</span>
-          <span className="cube-face cube-bottom">REACT</span>
-        </div>
-
-       
-      </div>
-
       <div className="hero-content">
         <div className="hero-code-column">
           <div className="hero-code">
@@ -195,6 +200,25 @@ export default function Hero() {
 };`}
             </pre>
           </div>
+        </div>
+
+        <div className="hero-3d-scene" aria-hidden="true">
+          <div className="scene-ring scene-ring-1" />
+          <div className="scene-ring scene-ring-2" />
+          <div className="scene-ring scene-ring-3" />
+          <div className="scene-core" />
+
+          <div className="scene-cube">
+            <span className="cube-face cube-front">JS</span>
+            <span className="cube-face cube-back">API</span>
+            <span className="cube-face cube-right">UI</span>
+            <span className="cube-face cube-left">DB</span>
+            <span className="cube-face cube-top">NODE</span>
+            <span className="cube-face cube-bottom">REACT</span>
+          </div>
+
+          <span className="scene-chip chip-2">Node.js</span>
+          <span className="scene-chip chip-3">MongoDB</span>
         </div>
 
         <div className="hero-main">
