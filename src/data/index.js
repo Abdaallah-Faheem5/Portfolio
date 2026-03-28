@@ -9,7 +9,7 @@
     location: 'Amman, Jordan',
     linkedin: 'https://www.linkedin.com/in/abdallah-faheem-169ab5296/',
     github: 'https://github.com/Abdaallah-Faheem5',
-    cv: '/cv.pdf',
+    cv: '/CV.pdf',
     status: 'open_to_work',
   },
 
