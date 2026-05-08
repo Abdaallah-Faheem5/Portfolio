@@ -101,7 +101,7 @@
       title: 'E-Commerce "EZ-Home"',
       desc: 'Backend ECommerce covering auth, products, cart, orders, and wishlist with security-first architecture.',
       tech: ['Node.js', 'Express', 'MongoDB', 'Redis', 'JWT'],
-      demo: 'https://ezhomejo.netlify.app',
+      demo: 'https://ez-homejo.onrender.com',
       github: null,
     },
     ,
