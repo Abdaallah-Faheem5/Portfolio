@@ -30,7 +30,7 @@ export const data = {
     {
       icon: 'FE',
       name: 'Frontend',
-      desc: 'React.js - Bootstrap',
+      desc: 'React.js - Bootstrap - HTML/CSS',
       level: 90,
       span: '1x1',
       tags: ['React.js', 'HTML/CSS', 'Bootstrap'],
@@ -41,7 +41,7 @@ export const data = {
       desc: 'MySQL - PostgreSQL - MongoDB',
       level: 80,
       span: '1x1',
-      tags: [],
+      tags: ['MySQL', 'PostgreSQL', 'MongoDB'],
     },
     
     {
@@ -50,7 +50,7 @@ export const data = {
       desc: 'Git - GitHub - VS Code - Postman - NPM',
       level: 88,
       span: '1x1',
-      tags: [], 
+      tags: ['GIT', 'GitHub', 'VS Code', 'Postman', 'NPM'], 
     },
     {
       icon: 'JV',
