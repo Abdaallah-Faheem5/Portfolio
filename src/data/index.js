@@ -1,4 +1,4 @@
-﻿export const data = {
+export const data = {
   personal: {
     name: 'Abdallah Faheem',
     title: 'Full-Stack Software Engineer',
@@ -47,7 +47,7 @@
     {
       icon: 'TL',
       name: 'Dev Tools',
-      desc: 'Git - GitHub - VS Code',
+      desc: 'Git - GitHub - VS Code - Postman - NPM',
       level: 88,
       span: '1x1',
       tags: [], 
