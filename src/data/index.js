@@ -1,4 +1,4 @@
-﻿export const data = {
+export const data = {
   personal: {
     name: 'Abdallah Faheem',
     title: 'Full-Stack Software Engineer',
@@ -30,7 +30,7 @@
     {
       icon: 'FE',
       name: 'Frontend',
-      desc: 'React.js - Bootstrap',
+      desc: 'React.js - Bootstrap - HTML/CSS',
       level: 90,
       span: '1x1',
       tags: ['React.js', 'HTML/CSS', 'Bootstrap'],
@@ -41,16 +41,16 @@
       desc: 'MySQL - PostgreSQL - MongoDB',
       level: 80,
       span: '1x1',
-      tags: [],
+      tags: ['MySQL', 'PostgreSQL', 'MongoDB'],
     },
 
     {
       icon: 'TL',
       name: 'Dev Tools',
-      desc: 'Git - GitHub - VS Code',
+      desc: 'Git - GitHub - VS Code - Postman - NPM',
       level: 88,
       span: '1x1',
-      tags: [],
+      tags: [], 
     },
     {
       icon: 'JV',
@@ -112,6 +112,5 @@
       demo: null,
       github: 'https://github.com/Abdaallah-Faheem5/Restaurant.git',
     },
-
   ],
 };
