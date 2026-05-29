@@ -98,7 +98,7 @@ export const data = {
     },
     {
       icon: '03',
-      title: 'Engineering Company Portfolio "JODRAN AL KHALEEJ"',
+      title: 'Company Portfolio "JODRAN AL KHALEEJ"',
       desc: 'High-end corporate portfolio built with React and Three.js, featuring interactive 3D experiences, animated service showcases, document management sections, and responsive modern design.',
       tech: ['React', 'Three.js', 'CSS'],
       demo: 'https://jodran-alkhaleej.onrender.com/',

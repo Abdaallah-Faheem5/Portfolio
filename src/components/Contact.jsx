@@ -53,16 +53,8 @@ export default function Contact() {
           href: githubUrl,
           external: isExternalUrl(githubUrl),
         }
-      : null,
-    cvUrl
-      ? {
-          icon: 'CV',
-          label: 'Resume',
-          value: 'Download CV',
-          href: cvUrl,
-          external: isExternalUrl(cvUrl),
-        }
-      : null,
+      : null
+      ,
   ].filter(Boolean);
 
   return (
