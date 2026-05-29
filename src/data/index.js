@@ -14,11 +14,11 @@
   },
 
   stats: [
-    
+
   ],
 
   skills: [
-    
+
     {
       icon: 'BE',
       name: 'Backend',
@@ -43,14 +43,14 @@
       span: '1x1',
       tags: [],
     },
-    
+
     {
       icon: 'TL',
       name: 'Dev Tools',
       desc: 'Git - GitHub - VS Code',
       level: 88,
       span: '1x1',
-      tags: [], 
+      tags: [],
     },
     {
       icon: 'JV',
@@ -60,10 +60,10 @@
       span: '1x1',
       tags: ['JAVA', 'JS', 'TS'],
     },
-    
+
   ],
 
-  experience: [ 
+  experience: [
     {
       icon: 'W',
       date: 'Dec 2025 - Feb 2026',
@@ -89,21 +89,29 @@
 
   projects: [
     {
+      icon: '02',
+      title: 'E-Commerce "EZ-Home"',
+      desc: 'Backend ECommerce covering auth, products, cart, orders, and wishlist with security-first architecture.',
+      tech: ['Node.js', 'Express', 'MongoDB', 'Redis', 'JWT'],
+      demo: 'https://ez-homejo.onrender.com/',
+      github: null,
+    },
+    {
+      icon: '03',
+      title: 'Engineering Company Portfolio "JODRAN AL KHALEEJ"',
+      desc: 'High-end corporate portfolio built with React and Three.js, featuring interactive 3D experiences, animated service showcases, document management sections, and responsive modern design.',
+      tech: ['React', 'Three.js', 'CSS'],
+      demo: 'https://jodran-alkhaleej.onrender.com/',
+      github: 'https://github.com/Abdaallah-Faheem5/JODRAN_AL_KHALEEJ.git',
+    },
+    {
       icon: '01',
       title: 'Restaurant Web Application',
       desc: 'Full-stack restaurant platform with dynamic menu browsing, reservation forms, and a complete admin dashboard for menu management.',
       tech: ['React', 'Node.js', 'Express', 'MongoDB'],
       demo: null,
-      github: 'https://github.com/Abdaallah-Faheem5/Restaurant..git',
+      github: 'https://github.com/Abdaallah-Faheem5/Restaurant.git',
     },
-    {
-      icon: '02',
-      title: 'E-Commerce "EZ-Home"',
-      desc: 'Backend ECommerce covering auth, products, cart, orders, and wishlist with security-first architecture.',
-      tech: ['Node.js', 'Express', 'MongoDB', 'Redis', 'JWT'],
-      demo: 'https://ezhomejo.netlify.app',
-      github: null,
-    },
-    ,
+
   ],
 };
