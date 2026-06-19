@@ -1,3 +1,7 @@
+import ecommercePreview from '../assets/EZ-Home.png';
+import companyPreview from '../assets/jodran.png';
+import restaurantPreview from '../assets/restaurant.png';
+
 export const data = {
   personal: {
     name: 'Abdallah Faheem',
@@ -91,6 +95,7 @@ export const data = {
     {
       icon: '02',
       title: 'E-Commerce "EZ-Home"',
+      image: ecommercePreview,
       desc: 'Backend ECommerce covering auth, products, cart, orders, and wishlist with security-first architecture.',
       tech: ['Node.js', 'Express', 'MongoDB', 'Redis', 'JWT'],
       demo: 'https://ez-homejo.onrender.com/',
@@ -99,6 +104,7 @@ export const data = {
     {
       icon: '03',
       title: 'Company Portfolio "JODRAN AL KHALEEJ"',
+      image: companyPreview,
       desc: 'High-end corporate portfolio built with React and Three.js, featuring interactive 3D experiences, animated service showcases, document management sections, and responsive modern design.',
       tech: ['React', 'Three.js', 'CSS'],
       demo: 'https://jodran-alkhaleej.onrender.com/',
@@ -107,6 +113,7 @@ export const data = {
     {
       icon: '01',
       title: 'Restaurant Web Application',
+      image: restaurantPreview,
       desc: 'Full-stack restaurant platform with dynamic menu browsing, reservation forms, and a complete admin dashboard for menu management.',
       tech: ['React', 'Node.js', 'Express', 'MongoDB'],
       demo: null,

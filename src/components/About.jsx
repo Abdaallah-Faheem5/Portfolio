@@ -58,11 +58,11 @@ export default function About() {
 
           <div className="about-content reveal" ref={contentRef}>
             <h3 className="about-heading">
-              Full-Stack Engineer.<br />
+              Full-Stack Developer.<br />
               <span className="gold-text">Problem Solver. Builder.</span>
             </h3>
             <p className="about-desc">
-              Software Engineering student at Al-Zaytoonah University (graduating Jan 2027),
+              Software Engineering student at Al-Zaytoonah University of Jordan,
               with real-world internship experience at Dot Jordan. I build responsive frontends
               and scalable backend systems — from dynamic React UIs to RESTful APIs with
               Node.js, Express, and both SQL and NoSQL databases.

@@ -10,7 +10,6 @@ export default function Footer() {
         <p className="footer-copy">
           © {year} Abdullah Faheem Amlih · Amman, Jordan
         </p>
-        
       </div>
     </footer>
   );

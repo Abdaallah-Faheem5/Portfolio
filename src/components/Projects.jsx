@@ -69,6 +69,18 @@ function ProjectCard({ project, delay }) {
       <div className="card-glow" />
       <div className="card-top-line" />
 
+      {project.image && (
+        <div className="project-media">
+          <img
+            src={project.image}
+            alt={`${project.title} preview`}
+            className="project-image"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      )}
+
       <div className="project-header">
         <span className="project-icon">
           <AppIcon name={project.icon} />

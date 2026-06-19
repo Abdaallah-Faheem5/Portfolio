@@ -2,7 +2,7 @@
 import { data } from '../data/index.js';
 import './Hero.css';
 
-const WORDS = ['Full-Stack Engineer',' Bacend Engineer', 'Frontend Engineer'];
+const WORDS = ['Full-Stack Developer',' Bacend Developer', 'Frontend Developer', 'Database Developer'];
 
 function normalizeUrl(url) {
   if (!url || url === '#') return null;
