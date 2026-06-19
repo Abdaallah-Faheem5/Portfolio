@@ -1,5 +1,5 @@
 import ecommercePreview from '../assets/EZ-Home.png';
-import companyPreview from '../assets/jodran.png';
+import companyPreview from '../assets/Jodran.png';
 import restaurantPreview from '../assets/restaurant.png';
 
 export const data = {
