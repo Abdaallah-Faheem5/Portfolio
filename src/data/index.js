@@ -1,7 +1,7 @@
 import ecommercePreview from '../assets/EZ-Home.png';
 import companyPreview from '../assets/Jodran.png';
 import restaurantPreview from '../assets/restaurant.png';
-
+import amjadPreview from '../assets/amjad.png';
 export const data = {
   personal: {
     name: 'Abdallah Faheem',
@@ -119,5 +119,15 @@ export const data = {
       demo: null,
       github: 'https://github.com/Abdaallah-Faheem5/Restaurant.git',
     },
+    {
+      icon: '03',
+      title: 'Personal Portfolio',
+      image: amjadPreview,
+      desc: 'A sleek personal portfolio website showcasing projects, skills, and experience with a modern responsive design.',
+      tech: ['React', 'CSS'],
+      demo: 'https://amjad-hisham-yousuf.onrender.com/',
+      github: null,
+    },
   ],
+
 };
