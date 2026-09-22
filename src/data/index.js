@@ -2,7 +2,59 @@ import ecommercePreview from '../assets/EZ-Home.png';
 import companyPreview from '../assets/Jodran.png';
 import restaurantPreview from '../assets/restaurant.png';
 import amjadPreview from '../assets/amjad.png';
+
 export const data = {
+  navigation: ['About', 'Skills', 'Experience', 'Projects', 'Contact'],
+  branding: {
+    navbar: '< AF5 />',
+    footer: '⟨ AF5 /⟩',
+    copyright: 'Abdullah Faheem Amlih · Amman, Jordan',
+  },
+  sections: {
+    about: { label: '01 / ABOUT', title: 'Engineering profile' },
+    skills: { label: '// 02. skill_set', title: 'What I Build With' },
+    experience: { label: '// 03. experience', title: 'Journey So Far' },
+    projects: { label: '// 04. projects', title: "Things I've Built" },
+    contact: { label: '// 05. contact', title: "Let's Build Something" },
+  },
+  hero: {
+    name: 'Abdullah Faheem',
+    eyebrow: 'Software engineer / Full stack',
+    headline: ['Building digital', 'systems with', 'code & purpose.'],
+    description: 'From React interfaces to Node.js APIs and databases. I build practical web systems with clear structure and thoughtful details.',
+    roles: ['Full-Stack Developer', ' Bacend Developer', 'Frontend Developer', 'Database Developer'],
+    availability: 'Available for opportunities',
+    workLabel: 'View Work',
+    contactLabel: 'Contact Me',
+    cvLabel: 'Download CV',
+  },
+  about: {
+    heading: 'Problem solving.',
+    accent: 'System building.',
+    paragraphs: [
+      'I’m a Software Engineering student at Al-Zaytoonah University of Jordan, focused on full-stack and backend development.',
+      'At Dot Jordan, I worked on React interfaces and Node.js APIs with MongoDB. I’m building on that experience through practical web projects, from the interface to the database.',
+    ],
+    details: [
+      { label: 'Education', value: 'Software Engineering student' },
+      { label: 'Direction', value: 'Full Stack / Backend' },
+    ],
+    approachLabel: 'How I approach the work',
+    approach: [
+      { title: 'Break the problem down.', description: 'JCPC and AmmanCPC taught me to work through complex problems systematically, one decision at a time.' },
+      { title: 'Connect the whole system.', description: 'I focus on clear APIs, considered database structure, and code that stays understandable as a project grows.' },
+    ],
+    focusLabel: 'Current focus',
+    focus: 'Node.js APIs · SQL & NoSQL · Clean architecture',
+  },
+  skillQuote: ['The best code is', 'invisible to the user.'],
+  contactIntro: "Got a project? Looking for a developer? I'm open.",
+  contactMethods: [
+    { field: 'email', icon: 'EMAIL', label: 'Email' },
+    { field: 'phone', icon: 'PHONE', label: 'Phone' },
+    { field: 'linkedin', icon: 'LINKEDIN', label: 'LinkedIn', value: 'LinkedIn Profile' },
+    { field: 'github', icon: 'GITHUB', label: 'GitHub', value: 'GitHub Portfolio' },
+  ],
   personal: {
     name: 'Abdallah Faheem',
     title: 'Full-Stack Software Engineer',

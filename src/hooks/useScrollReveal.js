@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
+import styles from '../styles/sections.module.css';
 
-export function useScrollReveal(options = {}) {
+export function useScrollReveal({ threshold = 0.15, rootMargin = '0px 0px -50px 0px' } = {}) {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -10,16 +11,16 @@ export function useScrollReveal(options = {}) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          el.classList.add('visible');
+          el.classList.add(styles.visible);
           observer.unobserve(el);
         }
       },
-      { threshold: 0.15, rootMargin: '0px 0px -50px 0px', ...options }
+      { threshold, rootMargin }
     );
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [threshold, rootMargin]);
 
   return ref;
 }

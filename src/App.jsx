@@ -1,43 +1,17 @@
-import { useEffect, useState } from 'react';
-import Navbar from './components/Navbar.jsx';
-import Hero from './components/Hero.jsx';
-import About from './components/About.jsx';
-import Skills from './components/Skills.jsx';
-import Experience from './components/Experience.jsx';
-import Projects from './components/Projects.jsx';
-import Contact from './components/Contact.jsx';
-import Footer from './components/Footer.jsx';
-import './styles/globals.css';
+import Navbar from './components/layout/Navbar.jsx';
+import Hero from './components/sections/Hero.jsx';
+import About from './components/sections/About.jsx';
+import Skills from './components/sections/Skills.jsx';
+import Experience from './components/sections/Experience.jsx';
+import Projects from './components/sections/Projects.jsx';
+import Contact from './components/sections/Contact.jsx';
+import Footer from './components/layout/Footer.jsx';
+import PageEffects from './components/layout/PageEffects.jsx';
 
 export default function App() {
-  const [scrollWidth, setScrollWidth] = useState(0);
-
-  useEffect(() => {
-    const onScroll = () => {
-      const total = document.documentElement.scrollHeight - window.innerHeight;
-      setScrollWidth((window.scrollY / total) * 100);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
   return (
     <>
-      {/* Scroll Progress Bar */}
-      <div
-        className="scroll-progress"
-        style={{ width: `${scrollWidth}%` }}
-      />
-
-      {/* Background */}
-      <div className="bg-orbs" aria-hidden="true">
-        <div className="orb orb-1" />
-        <div className="orb orb-2" />
-        <div className="orb orb-3" />
-      </div>
-      <div className="bg-grid" aria-hidden="true" />
-
-      {/* App */}
+      <PageEffects />
       <Navbar />
       <main>
         <Hero />

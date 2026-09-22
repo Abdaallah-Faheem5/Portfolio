@@ -1,11 +1,9 @@
 import {
-  FiAward,
   FiBookOpen,
   FiBriefcase,
   FiCode,
   FiDatabase,
   FiExternalLink,
-  FiFileText,
   FiFlag,
   FiGithub,
   FiLinkedin,
@@ -24,7 +22,6 @@ const ICON_MAP = {
   DB: FiDatabase,
   JV: FiCode,
   TL: FiTool,
-  CP: FiAward,
   // experience
   W: FiBriefcase,
   E: FiBookOpen,
@@ -38,11 +35,9 @@ const ICON_MAP = {
   PHONE: FiPhone,
   LINKEDIN: FiLinkedin,
   GITHUB: FiGithub,
-  CV: FiFileText,
 };
 
 export function AppIcon({ name, className }) {
   const Icon = ICON_MAP[name] || FiCode;
   return <Icon className={className} aria-hidden="true" focusable="false" />;
 }
-

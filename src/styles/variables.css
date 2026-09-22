@@ -1,0 +1,42 @@
+:root {
+  --void:        #000000;
+  --void-2:      #0a0a0a;
+  --void-3:      #111111;
+  --void-4:      #1a1a1a;
+  --gold:        #D4AF37;
+  --gold-light:  #F5D061;
+  --gold-dim:    #a07c1e;
+  --white:       #F8F8F8;
+  --text-primary:   #F8F8F8;
+  --text-secondary: rgba(248,248,248,0.6);
+  --text-muted:     rgba(248,248,248,0.35);
+  --glass-bg:    rgba(255,255,255,0.03);
+  --glass-border: rgba(212,175,55,0.15);
+  --ease-snap:   cubic-bezier(0.16,1,0.3,1);
+  --ease-bounce: cubic-bezier(0.34,1.56,0.64,1);
+
+  --font-body: 'JetBrains Mono', monospace;
+  --font-heading: 'Syne', sans-serif;
+  --container-width: 1100px;
+  --container-padding: 40px;
+  --container-padding-mobile: 20px;
+  --section-spacing: 120px;
+  --section-spacing-mobile: 92px;
+  --section-header-gap: 64px;
+  --section-header-gap-mobile: 36px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+  --duration-fast: 0.15s;
+  --duration-normal: 0.3s;
+  --duration-slow: 0.4s;
+  --shadow-button: 0 4px 30px rgba(212,175,55,0.3);
+  --shadow-button-hover: 0 8px 40px rgba(212,175,55,0.5);
+}

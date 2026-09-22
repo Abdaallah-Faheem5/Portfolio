@@ -1,8 +1,9 @@
 ﻿import { useEffect, useRef } from 'react';
-import { data } from '../data/index.js';
-import { useScrollReveal } from '../hooks/useScrollReveal.js';
-import { AppIcon } from './AppIcon.jsx';
-import './Projects.css';
+import { data } from '../../data/index.js';
+import { useScrollReveal } from '../../hooks/useScrollReveal.js';
+import { AppIcon } from '../AppIcon.jsx';
+import styles from './Projects.module.css';
+import shared from '../../styles/sections.module.css';
 
 function normalizeUrl(url) {
   if (!url || url === '#') return null;
@@ -26,7 +27,7 @@ function ProjectCard({ project, delay }) {
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          el.classList.add('visible');
+          el.classList.add(styles.visible);
           obs.disconnect();
         }
       },
@@ -38,6 +39,7 @@ function ProjectCard({ project, delay }) {
   }, []);
 
   const handleMove = (event) => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const el = cardRef.current;
     if (!el) return;
 
@@ -50,46 +52,46 @@ function ProjectCard({ project, delay }) {
   const handleLeave = () => {
     if (!cardRef.current) return;
     cardRef.current.style.transform = '';
-    cardRef.current.classList.remove('hovered');
+    cardRef.current.classList.remove(styles.hovered);
   };
 
   const handleEnter = () => {
-    if (cardRef.current) cardRef.current.classList.add('hovered');
+    if (cardRef.current) cardRef.current.classList.add(styles.hovered);
   };
 
   return (
     <div
       ref={cardRef}
-      className={`project-card ${project.featured ? 'featured' : ''}`}
+      className={`${styles['project-card']} ${project.featured ? styles.featured : ''}`}
       style={{ transitionDelay: `${delay}s` }}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       onMouseEnter={handleEnter}
     >
-      <div className="card-glow" />
-      <div className="card-top-line" />
+      <div className={styles['card-glow']} />
+      <div className={styles['card-top-line']} />
 
       {project.image && (
-        <div className="project-media">
+        <div className={styles['project-media']}>
           <img
             src={project.image}
             alt={`${project.title} preview`}
-            className="project-image"
+            className={styles['project-image']}
             loading="lazy"
             decoding="async"
           />
         </div>
       )}
 
-      <div className="project-header">
-        <span className="project-icon">
+      <div className={styles['project-header']}>
+        <span className={styles['project-icon']}>
           <AppIcon name={project.icon} />
         </span>
-        <div className="project-links">
+        <div className={styles['project-links']}>
           {demoUrl && (
             <a
               href={demoUrl}
-              className="proj-link"
+              className={styles['proj-link']}
               title="Live Demo"
               target={isExternalUrl(demoUrl) ? '_blank' : undefined}
               rel={isExternalUrl(demoUrl) ? 'noreferrer' : undefined}
@@ -100,7 +102,7 @@ function ProjectCard({ project, delay }) {
           {githubUrl && (
             <a
               href={githubUrl}
-              className="proj-link"
+              className={styles['proj-link']}
               title="GitHub"
               target={isExternalUrl(githubUrl) ? '_blank' : undefined}
               rel={isExternalUrl(githubUrl) ? 'noreferrer' : undefined}
@@ -111,12 +113,12 @@ function ProjectCard({ project, delay }) {
         </div>
       </div>
 
-      <h3 className="project-title">{project.title}</h3>
-      <p className="project-desc">{project.desc}</p>
+      <h3 className={styles['project-title']}>{project.title}</h3>
+      <p className={styles['project-desc']}>{project.desc}</p>
 
-      <div className="project-tech">
+      <div className={styles['project-tech']}>
         {project.tech.map((tech) => (
-          <span key={tech} className="tag">{tech}</span>
+          <span key={tech} className={shared.tag}>{tech}</span>
         ))}
       </div>
     </div>
@@ -127,14 +129,14 @@ export default function Projects() {
   const headerRef = useScrollReveal();
 
   return (
-    <section id="projects" className="projects-section">
-      <div className="container">
-        <div className="section-header reveal" ref={headerRef}>
-          <p className="section-label">// 04. projects</p>
-          <h2 className="section-title">Things I&apos;ve Built</h2>
+    <section id="projects" className={`${shared.section} ${styles['projects-section']}`}>
+      <div className={shared.container}>
+        <div className={`${shared['section-header']} ${shared.reveal}`} ref={headerRef}>
+          <p className={shared['section-label']}>{data.sections.projects.label}</p>
+          <h2 className={shared['section-title']}>{data.sections.projects.title}</h2>
         </div>
 
-        <div className="projects-grid">
+        <div className={styles['projects-grid']}>
           {data.projects.map((project, index) => (
             <ProjectCard key={project.title} project={project} delay={index * 0.1} />
           ))}
