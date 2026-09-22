@@ -1,4 +1,4 @@
-.skills-section { padding: var(--section-spacing) 0; scroll-margin-top: 64px; }
+.skills-section { padding: var(--section-spacing) 0; scroll-margin-top: 80px; }
 
 .section-header { text-align: center; margin-bottom: 56px; }
 .section-label { margin-bottom: var(--space-3); color: var(--gold); font-size: 0.61rem; letter-spacing: 0.12em; }

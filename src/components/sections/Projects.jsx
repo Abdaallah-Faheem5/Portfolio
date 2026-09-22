@@ -1,145 +1,47 @@
-﻿import { useEffect, useRef } from 'react';
-import { data } from '../../data/index.js';
+﻿import { data } from '../../data/index.js';
 import { useScrollReveal } from '../../hooks/useScrollReveal.js';
 import { AppIcon } from '../AppIcon.jsx';
 import styles from './Projects.module.css';
 import shared from '../../styles/sections.module.css';
 
-function normalizeUrl(url) {
-  if (!url || url === '#') return null;
-  if (/^(https?:\/\/|mailto:|tel:|\/)/i.test(url)) return url;
-  return `https://${url}`;
-}
-
-function isExternalUrl(url) {
-  return /^https?:\/\//i.test(url);
-}
-
-function ProjectCard({ project, delay }) {
-  const cardRef = useRef(null);
-  const demoUrl = normalizeUrl(project.demo);
-  const githubUrl = normalizeUrl(project.github);
-
-  useEffect(() => {
-    const el = cardRef.current;
-    if (!el) return;
-
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add(styles.visible);
-          obs.disconnect();
-        }
-      },
-      { threshold: 0.15 }
-    );
-
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-
-  const handleMove = (event) => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const el = cardRef.current;
-    if (!el) return;
-
-    const rect = el.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width - 0.5;
-    const y = (event.clientY - rect.top) / rect.height - 0.5;
-    el.style.transform = `perspective(700px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateZ(12px)`;
-  };
-
-  const handleLeave = () => {
-    if (!cardRef.current) return;
-    cardRef.current.style.transform = '';
-    cardRef.current.classList.remove(styles.hovered);
-  };
-
-  const handleEnter = () => {
-    if (cardRef.current) cardRef.current.classList.add(styles.hovered);
-  };
+function ProjectCard({ project }) {
+  const cardRef = useScrollReveal();
+  const href = `/projects/${project.slug}`;
 
   return (
-    <div
-      ref={cardRef}
-      className={`${styles['project-card']} ${project.featured ? styles.featured : ''}`}
-      style={{ transitionDelay: `${delay}s` }}
-      onMouseMove={handleMove}
-      onMouseLeave={handleLeave}
-      onMouseEnter={handleEnter}
-    >
-      <div className={styles['card-glow']} />
-      <div className={styles['card-top-line']} />
-
-      {project.image && (
-        <div className={styles['project-media']}>
-          <img
-            src={project.image}
-            alt={`${project.title} preview`}
-            className={styles['project-image']}
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-      )}
-
+    <article ref={cardRef} className={`${styles['project-card']} ${shared.reveal}`}>
+      <a className={styles['project-media']} href={href} tabIndex={-1} aria-hidden="true">
+        <img src={project.image} alt="" className={styles['project-image']} loading="lazy" decoding="async"
+          width={project.images[0].width} height={project.images[0].height} />
+      </a>
       <div className={styles['project-header']}>
-        <span className={styles['project-icon']}>
-          <AppIcon name={project.icon} />
-        </span>
+        <span className={styles['project-icon']}><AppIcon name={project.icon} /></span>
         <div className={styles['project-links']}>
-          {demoUrl && (
-            <a
-              href={demoUrl}
-              className={styles['proj-link']}
-              title="Live Demo"
-              target={isExternalUrl(demoUrl) ? '_blank' : undefined}
-              rel={isExternalUrl(demoUrl) ? 'noreferrer' : undefined}
-            >
-              <AppIcon name="01" />
-            </a>
-          )}
-          {githubUrl && (
-            <a
-              href={githubUrl}
-              className={styles['proj-link']}
-              title="GitHub"
-              target={isExternalUrl(githubUrl) ? '_blank' : undefined}
-              rel={isExternalUrl(githubUrl) ? 'noreferrer' : undefined}
-            >
-              <AppIcon name="GITHUB" />
-            </a>
-          )}
+          {project.demo && <a href={project.demo} className={styles['proj-link']} aria-label={`Live demo: ${project.title} (opens in a new tab)`} target="_blank" rel="noopener noreferrer"><AppIcon name="01" /></a>}
+          {project.github && <a href={project.github} className={styles['proj-link']} aria-label={`GitHub: ${project.title} (opens in a new tab)`} target="_blank" rel="noopener noreferrer"><AppIcon name="GITHUB" /></a>}
         </div>
       </div>
-
-      <h3 className={styles['project-title']}>{project.title}</h3>
-      <p className={styles['project-desc']}>{project.desc}</p>
-
-      <div className={styles['project-tech']}>
-        {project.tech.map((tech) => (
-          <span key={tech} className={shared.tag}>{tech}</span>
-        ))}
-      </div>
-    </div>
+      <h3 className={styles['project-title']}><a href={href}>{project.title}</a></h3>
+      <p className={styles['project-desc']}>{project.shortDescription}</p>
+      <ul className={styles['project-tech']}>
+        {project.tech.slice(0, 3).map((tech) => <li key={tech}>{tech}</li>)}
+      </ul>
+      <a className={styles['view-project']} href={href} aria-label={`View project: ${project.title}`}>View Project <span aria-hidden="true">↗</span></a>
+    </article>
   );
 }
 
 export default function Projects() {
   const headerRef = useScrollReveal();
-
   return (
-    <section id="projects" className={`${shared.section} ${styles['projects-section']}`}>
+    <section id="projects" className={`${shared.section} ${styles['projects-section']}`} aria-labelledby="projects-heading">
       <div className={shared.container}>
-        <div className={`${shared['section-header']} ${shared.reveal}`} ref={headerRef}>
-          <p className={shared['section-label']}>{data.sections.projects.label}</p>
-          <h2 className={shared['section-title']}>{data.sections.projects.title}</h2>
-        </div>
-
+        <header className={`${styles['section-header']} ${shared.reveal}`} ref={headerRef}>
+          <p className={styles['section-label']}>{data.sections.projects.label}</p>
+          <h2 id="projects-heading" className={styles['section-title']}>{data.sections.projects.title}</h2>
+        </header>
         <div className={styles['projects-grid']}>
-          {data.projects.map((project, index) => (
-            <ProjectCard key={project.title} project={project} delay={index * 0.1} />
-          ))}
+          {data.projects.map((project) => <ProjectCard key={project.slug} project={project} />)}
         </div>
       </div>
     </section>

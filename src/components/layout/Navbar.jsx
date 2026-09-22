@@ -27,7 +27,7 @@ export default function Navbar() {
         if (link.hash === `#${current.id}`) link.setAttribute('aria-current', 'location');
         else link.removeAttribute('aria-current');
       });
-    }, { rootMargin: '-64px 0px -50% 0px', threshold: 0 });
+    }, { rootMargin: '-72px 0px -50% 0px', threshold: 0 });
 
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();

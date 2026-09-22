@@ -16,7 +16,7 @@ export default function About() {
             <div className={styles['portrait-frame']}>
               <img
                 src={portrait}
-                alt="Portrait of Abdullah Faheem"
+                alt={`Portrait of ${data.hero.name}`}
                 width="1248"
                 height="1600"
                 loading="lazy"

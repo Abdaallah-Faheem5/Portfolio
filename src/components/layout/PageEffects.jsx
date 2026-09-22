@@ -10,7 +10,7 @@ export default function PageEffects() {
       frame = null;
       const total = document.documentElement.scrollHeight - window.innerHeight;
       const progress = total > 0 ? Math.min(100, Math.max(0, (window.scrollY / total) * 100)) : 0;
-      if (progressRef.current) progressRef.current.style.width = progress + '%';
+      if (progressRef.current) progressRef.current.style.transform = `scaleX(${progress / 100})`;
     };
     const scheduleUpdate = () => {
       if (frame === null) frame = requestAnimationFrame(updateProgress);
@@ -29,11 +29,7 @@ export default function PageEffects() {
     <>
       <div ref={progressRef} className={styles['scroll-progress']} aria-hidden="true" />
       {/* Background */}
-      <div className={styles['bg-orbs']} aria-hidden="true">
-        <div className={`${styles.orb} ${styles['orb-1']}`} />
-        <div className={`${styles.orb} ${styles['orb-2']}`} />
-        <div className={`${styles.orb} ${styles['orb-3']}`} />
-      </div>
+      <div className={styles['bg-orbs']} aria-hidden="true" />
       <div className={styles['bg-grid']} aria-hidden="true" />
     </>
   );

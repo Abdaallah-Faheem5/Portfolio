@@ -4,59 +4,39 @@ import { AppIcon } from '../AppIcon.jsx';
 import styles from './Contact.module.css';
 import shared from '../../styles/sections.module.css';
 
-function normalizeUrl(url) {
-  if (!url || url === '#') return null;
-  if (/^(https?:\/\/|mailto:|tel:|\/)/i.test(url)) return url;
-  return `https://${url}`;
-}
-
-function isExternalUrl(url) {
-  return /^https?:\/\//i.test(url);
-}
-
 export default function Contact() {
   const headerRef = useScrollReveal();
-  const cardRef = useScrollReveal();
-
-  const contacts = data.contactMethods.map((contact) => {
+  const contacts = data.contactMethods.flatMap((contact) => {
     const value = data.personal[contact.field];
-    const href = contact.field === 'email'
-      ? `mailto:${value}`
-      : contact.field === 'phone'
-        ? `tel:${value.replace(/\s/g, '')}`
-        : normalizeUrl(value);
-    return href ? { ...contact, value: contact.value || value, href, external: isExternalUrl(href) } : null;
-  }).filter(Boolean);
+    if (!value || value === '#') return [];
+    const href = contact.field === 'email' ? `mailto:${value}`
+      : contact.field === 'phone' ? `tel:${value.replace(/\s/g, '')}`
+      : /^https?:\/\//i.test(value) ? value : `https://${value}`;
+    return [{ ...contact, value: contact.value || value, href, external: /^https?:\/\//i.test(href) }];
+  });
 
   return (
-    <section id="contact" className={`${shared.section} ${styles['contact-section']}`}>
+    <section id="contact" className={`${shared.section} ${styles['contact-section']}`} aria-labelledby="contact-heading">
       <div className={shared.container}>
         <div className={styles['contact-wrap']}>
-          <div className={`${shared['section-header']} ${shared.reveal}`} ref={headerRef}>
-            <p className={shared['section-label']}>{data.sections.contact.label}</p>
-            <h2 className={shared['section-title']}>{data.sections.contact.title}</h2>
+          <header className={`${styles.header} ${shared.reveal}`} ref={headerRef}>
+            <p className={styles.label}>{data.sections.contact.label}</p>
+            <h2 id="contact-heading" className={styles.heading}>{data.sections.contact.title}</h2>
             <p className={styles['contact-sub']}>{data.contactIntro}</p>
-          </div>
-
-          <div className={`${styles['contact-card']} ${shared.reveal}`} ref={cardRef}>
-            <div className={styles['contact-orb']} />
-            {contacts.map((contact, index) => (
-              <a
-                key={contact.label}
-                href={contact.href}
-                className={styles['contact-link']}
+          </header>
+          <div className={styles.actions}>
+            {contacts.map((contact) => (
+              <a key={contact.field} href={contact.href}
+                className={`${styles['contact-link']} ${contact.field === 'email' ? styles.primary : ''}`}
                 target={contact.external ? '_blank' : undefined}
-                rel={contact.external ? 'noreferrer' : undefined}
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <span className={styles['cl-icon']}>
-                  <AppIcon name={contact.icon} />
+                rel={contact.external ? 'noopener noreferrer' : undefined}
+                aria-label={`${contact.label}: ${contact.value}${contact.external ? ' (opens in a new tab)' : ''}`}>
+                <span className={styles.icon}><AppIcon name={contact.icon} /></span>
+                <span className={styles.info}>
+                  <span className={styles['contact-label']}>{contact.label}</span>
+                  <span className={styles.value}>{contact.value}</span>
                 </span>
-                <div className={styles['cl-info']}>
-                  <p className={styles['cl-label']}>{contact.label}</p>
-                  <p className={styles['cl-value']}>{contact.value}</p>
-                </div>
-                <span className={styles['cl-arrow']}>-&gt;</span>
+                <span className={styles.arrow} aria-hidden="true">↗</span>
               </a>
             ))}
           </div>
