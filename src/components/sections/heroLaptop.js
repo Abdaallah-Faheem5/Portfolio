@@ -42,7 +42,7 @@ export function createHeroLaptop(host, { name, location }) {
   const gold = keep(new THREE.MeshStandardMaterial({ color: 0xd4af37, metalness: 0.7, roughness: 0.35 }));
 
   const laptop = new THREE.Group();
-  laptop.scale.setScalar(0.8);
+  laptop.scale.setScalar(0.9);
   laptop.rotation.y = -0.3;
   scene.add(laptop);
 
@@ -229,8 +229,12 @@ export function createHeroLaptop(host, { name, location }) {
 
   return {
     resize(width, height) {
-      renderer.setSize(Math.max(width, 1), Math.max(height, 1), false);
-      camera.aspect = width / Math.max(height, 1);
+      // Match the wider canvas so rotation stays inside the camera frame
+      // without reducing the laptop's visible size.
+      const renderWidth = Math.max(width * 1.5, 1);
+      const renderHeight = Math.max(height, 1);
+      renderer.setSize(renderWidth, renderHeight, false);
+      camera.aspect = renderWidth / renderHeight;
       camera.updateProjectionMatrix();
       render();
     },

@@ -77,14 +77,19 @@ export default function Hero() {
     import('./heroLaptop.js').then(({ createHeroLaptop }) => {
       if (disposed) return;
       laptop = createHeroLaptop(stage, { name: data.hero.name, location: data.personal.location });
-      if (!laptop) return;
+      if (!laptop) {
+        anchor.dataset.failed = 'true';
+        return;
+      }
       measure();
       layer.dataset.ready = 'true';
       anchor.dataset.ready = 'true';
       visual.dataset.ready = 'true';
       schedule();
     }).catch(() => {
+      if (disposed) return;
       laptop?.dispose(); laptop = null;
+      anchor.dataset.failed = 'true';
       delete layer.dataset.ready;
       delete anchor.dataset.ready;
       delete visual.dataset.ready;
@@ -104,6 +109,7 @@ export default function Hero() {
       delete anchor.dataset.ready;
       delete visual.dataset.ready;
       hero.style.removeProperty('--hero-exit-x');
+      delete anchor.dataset.failed;
       hero.style.removeProperty('--hero-exit-opacity');
       delete hero.dataset.departed;
     };
@@ -123,14 +129,14 @@ export default function Hero() {
       <div className={styles.container}>
         <div className={styles.composition}>
           <div className={styles.content}>
-            <p className={styles.identity}>{data.hero.name}</p>
             <p className={styles.eyebrow}>{data.hero.eyebrow}</p>
 
             <h1 id="hero-heading" className={styles.headline}>
-              {data.hero.headline.map((line) => <span key={line}>{line}{' '}</span>)}
+              {data.hero.name.split(' ').slice(0, -1).join(' ')}{' '}
+              <span className={styles.surname}>{data.hero.name.split(' ').at(-1)}</span>
             </h1>
 
-            <p className={styles.description}>{data.hero.description}</p>
+            <p className={styles.description}>{data.hero.headline.join(' ')}</p>
 
             <div className={styles.actions}>
               <a href="#projects" className={styles.primary}>

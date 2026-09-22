@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0 0 auto;
   z-index: 200;
-  height: 64px;
+  height: 72px;
   background: rgba(0, 0, 0, 0.76);
   border-bottom: 1px solid transparent;
   transition: background-color var(--duration-normal) ease, border-color var(--duration-normal) ease;
@@ -32,7 +32,7 @@
   flex-shrink: 0;
   color: var(--gold);
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: -0.055em;
   text-decoration: none;
@@ -53,7 +53,7 @@
   min-height: 44px;
   color: rgba(248, 248, 248, 0.66);
   font-family: var(--font-body);
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   font-weight: 500;
   letter-spacing: -0.025em;
   line-height: 1.4;
@@ -137,7 +137,7 @@
 
   .toggle-label {
     font-family: var(--font-body);
-    font-size: 0.7rem;
+    font-size: 0.78rem;
     font-weight: 500;
   }
 
@@ -170,7 +170,7 @@
     top: calc(100% + 8px);
     right: var(--container-padding-mobile);
     width: min(264px, calc(100vw - 40px));
-    max-height: calc(100dvh - 88px);
+    max-height: calc(100dvh - 96px);
     overflow-y: auto;
     overscroll-behavior: contain;
     display: flex;
@@ -200,7 +200,7 @@
     min-height: 48px;
     padding: 0 var(--space-4);
     border-radius: var(--radius-sm);
-    font-size: 0.8rem;
+    font-size: 0.88rem;
     transition: color var(--duration-fast) ease, background-color var(--duration-fast) ease;
   }
 
