@@ -2,6 +2,7 @@ import { StrictMode, Suspense, lazy, useEffect, useLayoutEffect, useState } from
 import { createRoot } from 'react-dom/client';
 import './styles/globals.css';
 import { PreferencesProvider, usePortfolio } from './context/Preferences.jsx';
+import WelcomeIntro from './components/layout/WelcomeIntro.jsx';
 
 // Native links keep browser history, refresh, and opening in a new tab intact.
 // Load only the selected page; project pages never initialize the Hero's WebGL.
@@ -41,9 +42,11 @@ function Page() {
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <PreferencesProvider>
+    <WelcomeIntro>
     <Suspense fallback={<Loading />}>
       <Page />
     </Suspense>
+    </WelcomeIntro>
     </PreferencesProvider>
   </StrictMode>
 );
