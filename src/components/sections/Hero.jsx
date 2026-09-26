@@ -3,12 +3,6 @@ import { usePortfolio } from '../../context/Preferences.jsx';
 import { data as codeData } from '../../data/index.js';
 import styles from './Hero.module.css';
 
-function normalizeUrl(url) {
-  if (!url || url === '#') return null;
-  if (/^(https?:\/\/|mailto:|tel:|\/)/i.test(url)) return url;
-  return `https://${url}`;
-}
-
 export default function Hero() {
   const { data, t, language } = usePortfolio();
   const heroRef = useRef(null);
@@ -17,8 +11,7 @@ export default function Hero() {
   const stageRef = useRef(null);
   const controlRef = useRef(null);
   const [paused, setPaused] = useState(false);
-  const cvUrl = normalizeUrl(data.personal.cv);
-  const cvExternal = /^https?:\/\//i.test(cvUrl || '');
+  const cvUrl = data.personal.cv;
 
   useEffect(() => {
     const hero = heroRef.current;
@@ -154,8 +147,7 @@ export default function Hero() {
               <a
                 href={cvUrl}
                 className={styles.resume}
-                target={cvExternal ? '_blank' : undefined}
-                rel={cvExternal ? 'noreferrer' : undefined}
+                download="Abdalah-Faheem-CV.pdf"
               >
                 {data.hero.cvLabel}<span aria-hidden="true">{language === 'ar' ? '\u2196' : '\u2197'}</span>
               </a>

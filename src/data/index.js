@@ -1,3 +1,4 @@
+import cvFile from '../assets/CV.pdf';
 import ecommercePreview from '../assets/EZHome/EZ-Home.png';
 import ecommerceVideo from '../assets/EZHome/Ez-Home.mp4';
 import ecommerceProduct from '../assets/EZHome/product.png';
@@ -95,7 +96,7 @@ export const data = {
     location: 'Amman, Jordan',
     linkedin: 'https://www.linkedin.com/in/abdallah-faheem-169ab5296/',
     github: 'https://github.com/Abdaallah-Faheem5',
-    cv: 'https://1drv.ms/b/c/5ee76b87d9221053/IQDRJ55blxDwSazBZTq5SZmpAQEGYCKVIpfevQTHk-1ZcB4?e=k2PFaK',
+    cv: cvFile,
     status: 'open_to_work',
   },
 
