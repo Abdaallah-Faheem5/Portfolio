@@ -3,7 +3,7 @@ import { data } from '../../data/index.js';
 import styles from './ProjectDetails.module.css';
 
 export default function ProjectDetails() {
-  const match = window.location.pathname.match(/^\/projects\/([^/]+)\/?$/);
+  const match = window.location.hash.match(/^#projects\/([^/]+)\/?$/);
   const index = data.projects.findIndex((item) => item.slug === match?.[1]);
   const project = data.projects[index];
   const [selectedGroup, setSelectedGroup] = useState(null);
@@ -109,8 +109,8 @@ export default function ProjectDetails() {
       )}
 
       <nav className={styles.navigation} aria-label="Project navigation">
-        {previous && <a href={`/projects/${previous.slug}`}><span>← Previous project</span><strong>{previous.title}</strong></a>}
-        {next && <a className={styles.next} href={`/projects/${next.slug}`}><span>Next project →</span><strong>{next.title}</strong></a>}
+        {previous && <a href={`/#projects/${previous.slug}`}><span>← Previous project</span><strong>{previous.title}</strong></a>}
+        {next && <a className={styles.next} href={`/#projects/${next.slug}`}><span>Next project →</span><strong>{next.title}</strong></a>}
       </nav>
     </main>
   );

@@ -6,7 +6,7 @@ import shared from '../../styles/sections.module.css';
 
 function ProjectCard({ project }) {
   const cardRef = useScrollReveal();
-  const href = `/projects/${project.slug}`;
+  const href = `/#projects/${project.slug}`;
 
   return (
     <article ref={cardRef} className={`${styles['project-card']} ${shared.reveal}`}>
