@@ -22,7 +22,8 @@ export function createHeroLaptop(host, { name, location }) {
   camera.position.set(0, 3.6, 9.2);
   camera.lookAt(0, 0.9, 0);
 
-  scene.add(new THREE.HemisphereLight(0xe8ecf5, 0x1a1712, 2.2));
+  const ambient = new THREE.HemisphereLight(0xe8ecf5, 0x1a1712, 2.2);
+  scene.add(ambient);
   const key = new THREE.DirectionalLight(0xffffff, 4);
   key.position.set(-4, 6, 4);
   key.castShadow = true;
@@ -40,6 +41,8 @@ export function createHeroLaptop(host, { name, location }) {
   const dark = keep(new THREE.MeshStandardMaterial({ color: 0x0c0d0f, metalness: 0.25, roughness: 0.5 }));
   const rubber = keep(new THREE.MeshStandardMaterial({ color: 0x060606, roughness: 0.9 }));
   const gold = keep(new THREE.MeshStandardMaterial({ color: 0xd4af37, metalness: 0.7, roughness: 0.35 }));
+  const bezel = keep(rubber.clone());
+  const keycaps = keep(dark.clone());
 
   const laptop = new THREE.Group();
   laptop.scale.setScalar(0.9);
@@ -81,7 +84,7 @@ export function createHeroLaptop(host, { name, location }) {
   );
 
   const capGeometry = keep(new RoundedBoxGeometry(1, 0.045, 0.245, 2, 0.018));
-  const caps = new THREE.InstancedMesh(capGeometry, dark, keys.length);
+  const caps = new THREE.InstancedMesh(capGeometry, keycaps, keys.length);
   caps.castShadow = true;
   const dummy = new THREE.Object3D();
   keys.forEach((k, i) => {
@@ -95,11 +98,9 @@ export function createHeroLaptop(host, { name, location }) {
   const legendCanvas = document.createElement('canvas');
   legendCanvas.width = 1024; legendCanvas.height = 440;
   const legendCtx = legendCanvas.getContext('2d');
-  legendCtx.fillStyle = '#c9c2a6';
   legendCtx.textAlign = 'center';
   legendCtx.textBaseline = 'middle';
   legendCtx.font = '22px monospace';
-  keys.forEach((k) => legendCtx.fillText(k.label, (k.x / 3.86 + 0.5) * 1024, ((k.z + 0.49) / 1.64 + 0.5) * 440));
   const legendTexture = keep(new THREE.CanvasTexture(legendCanvas));
   legendTexture.colorSpace = THREE.SRGBColorSpace;
   const labels = new THREE.Mesh(
@@ -117,7 +118,7 @@ export function createHeroLaptop(host, { name, location }) {
   laptop.add(hinge);
   mesh(laptop, [3.75, 0.14, 0.16], [0, 0.09, -1.41], dark, 0.06);
   mesh(hinge, [4.8, 2.92, 0.11], [0, 1.46, 0], metal, 0.05);
-  mesh(hinge, [4.64, 2.75, 0.02], [0, 1.46, 0.066], rubber, 0.009);
+  mesh(hinge, [4.64, 2.75, 0.02], [0, 1.46, 0.066], bezel, 0.009);
 
   const badge = new THREE.Mesh(
     keep(new THREE.PlaneGeometry(0.44, 0.1)),
@@ -142,21 +143,21 @@ export function createHeroLaptop(host, { name, location }) {
   screenTexture.colorSpace = THREE.SRGBColorSpace;
   screenTexture.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
 
-  function drawScreen() {
-    ctx.fillStyle = '#0a0d10';
+  function drawScreen(color) {
+    ctx.fillStyle = color('screen', '#0a0d10');
     ctx.fillRect(0, 0, 1440, 900);
     const glow = ctx.createRadialGradient(1180, 420, 10, 1180, 420, 780);
-    glow.addColorStop(0, '#241d0f');
-    glow.addColorStop(1, '#0a0d10');
+    glow.addColorStop(0, color('screen-highlight', '#241d0f'));
+    glow.addColorStop(1, color('screen', '#0a0d10'));
     ctx.fillStyle = glow;
     ctx.fillRect(0, 0, 1440, 900);
 
-    ctx.fillStyle = '#151a20';
+    ctx.fillStyle = color('screen-toolbar', '#151a20');
     ctx.fillRect(0, 0, 1440, 68);
     ctx.font = '24px monospace';
-    ctx.fillStyle = '#c6cbd4';
+    ctx.fillStyle = color('screen-muted', '#c6cbd4');
     ctx.fillText('developer.config.js', 36, 43);
-    ctx.fillStyle = '#d4af37';
+    ctx.fillStyle = color('accent', '#d4af37');
     ctx.fillRect(34, 66, 290, 2);
 
     const lines = [
@@ -173,27 +174,26 @@ export function createHeroLaptop(host, { name, location }) {
     ctx.font = '27px monospace';
     lines.forEach((line, i) => {
       const y = 135 + i * 52;
-      ctx.fillStyle = '#5b6472';
+      ctx.fillStyle = color('screen-line', '#5b6472');
       ctx.fillText(String(i + 1).padStart(2, '0'), 30, y);
       let x = 96;
       line.split(/("[^"]*"|\bconst\b|\bexport\b|\bdefault\b)/g).forEach((token) => {
-        ctx.fillStyle = token.startsWith('"') ? '#a4d9bc' : /^(const|export|default)$/.test(token) ? '#d4af37' : '#d0d9e8';
+        ctx.fillStyle = token.startsWith('"') ? color('screen-string', '#a4d9bc') : /^(const|export|default)$/.test(token) ? color('accent', '#d4af37') : color('screen-text', '#d0d9e8');
         ctx.fillText(token, x, y);
         x += ctx.measureText(token).width;
       });
     });
 
-    ctx.fillStyle = '#12161b';
+    ctx.fillStyle = color('screen-status', '#12161b');
     ctx.fillRect(0, 836, 1440, 64);
-    ctx.fillStyle = '#a1adbf';
+    ctx.fillStyle = color('screen-muted', '#a1adbf');
     ctx.font = '22px monospace';
     ctx.fillText('main  /  JavaScript', 34, 874);
-    ctx.fillStyle = '#d4af37';
+    ctx.fillStyle = color('accent', '#d4af37');
     ctx.fillText('Interface → API → Data', 1090, 874);
 
     screenTexture.needsUpdate = true;
   }
-  drawScreen();
 
   const screen = new THREE.Mesh(
     keep(new THREE.PlaneGeometry(4.45, 2.5)),
@@ -218,6 +218,52 @@ export function createHeroLaptop(host, { name, location }) {
   const SWING_RANGE = 0.5;
   let running = false, previous = 0, elapsed = 0;
   const render = () => renderer.render(scene, camera);
+  // Keep the original dark material values verbatim; theme changes reuse GPU resources.
+  const materials = { body: metal, edge: edgeMat, recess: dark, feet: rubber, bezel, keycaps, accent: gold, badge: badge.material };
+  const darkMaterials = Object.fromEntries(Object.entries(materials).map(([name, material]) => [name, {
+    color: material.color.clone(), metalness: material.metalness, roughness: material.roughness,
+  }]));
+  let currentTheme;
+  function updateTheme() {
+    const theme = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+    if (theme === currentTheme) return;
+    currentTheme = theme;
+    const light = theme === 'light';
+    const styles = getComputedStyle(host);
+    const color = (name, fallback) => light ? styles.getPropertyValue(`--laptop-${name}`).trim() || fallback : fallback;
+    for (const [name, material] of Object.entries(materials)) {
+      const original = darkMaterials[name];
+      material.color.copy(original.color);
+      material.metalness = original.metalness;
+      material.roughness = original.roughness;
+      if (light) {
+        material.color.set(color(name, `#${original.color.getHexString()}`));
+        if (['body', 'edge', 'keycaps'].includes(name)) {
+          material.metalness = name === 'keycaps' ? 0.3 : 0.55;
+          material.roughness = name === 'edge' ? 0.32 : 0.44;
+        }
+      }
+    }
+    ambient.color.set(light ? color('ambient', '#eef0f2') : 0xe8ecf5);
+    ambient.groundColor.set(light ? color('ground', '#b8b1a3') : 0x1a1712);
+    ambient.intensity = light ? 2 : 2.2;
+    key.color.set(light ? color('highlight', '#fff4e4') : 0xffffff);
+    key.intensity = light ? 2 : 4;
+    rim.color.set(light ? color('rim', '#e0d5bb') : 0xd4af37);
+    rim.intensity = light ? 1.2 : 2.8;
+    shadowPlane.material.color.set(light ? color('shadow', '#46515a') : 0x000000);
+    shadowPlane.material.opacity = light ? 0.12 : 0.25;
+    legendCtx.clearRect(0, 0, legendCanvas.width, legendCanvas.height);
+    legendCtx.fillStyle = color('legend', '#c9c2a6');
+    keys.forEach((k) => legendCtx.fillText(k.label, (k.x / 3.86 + 0.5) * 1024, ((k.z + 0.49) / 1.64 + 0.5) * 440));
+    legendTexture.needsUpdate = true;
+    drawScreen(color);
+    // One render also updates the device while paused or under reduced motion.
+    render();
+  }
+  updateTheme();
+  const themeObserver = new MutationObserver(updateTheme);
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   function tick(time) {
     if (time - previous < 1000 / 30) return;
     const delta = previous ? Math.min((time - previous) / 1000, 0.1) : 0;
@@ -250,6 +296,7 @@ export function createHeroLaptop(host, { name, location }) {
       render();
     },
     dispose() {
+      themeObserver.disconnect();
       renderer.setAnimationLoop(null);
       resources.forEach((resource) => resource.dispose());
       renderer.dispose();

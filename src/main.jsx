@@ -1,6 +1,7 @@
 import { StrictMode, Suspense, lazy, useEffect, useLayoutEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles/globals.css';
+import { PreferencesProvider, usePortfolio } from './context/Preferences.jsx';
 
 // Native links keep browser history, refresh, and opening in a new tab intact.
 // Load only the selected page; project pages never initialize the Hero's WebGL.
@@ -19,6 +20,11 @@ const homeTitle = document.title;
 const Home = lazy(() => import('./App.jsx'));
 const Project = lazy(() => import('./components/sections/ProjectDetails.jsx'));
 
+function Loading() {
+  const { t } = usePortfolio();
+  return <p role="status">{t('Loading…')}</p>;
+}
+
 function Page() {
   const [hash, setHash] = useState(window.location.hash);
 
@@ -34,8 +40,10 @@ function Page() {
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Suspense fallback={<p role="status">Loading…</p>}>
+    <PreferencesProvider>
+    <Suspense fallback={<Loading />}>
       <Page />
     </Suspense>
+    </PreferencesProvider>
   </StrictMode>
 );

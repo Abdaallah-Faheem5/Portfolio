@@ -9,14 +9,14 @@
   justify-content: space-between;
   gap: var(--space-5);
   padding-bottom: var(--space-5);
-  border-bottom: 1px solid rgba(248, 248, 248, 0.15);
+  border-bottom: 1px solid var(--border);
   font-family: var(--font-body);
   font-size: 0.6rem;
   line-height: 1.6;
   letter-spacing: 0.06em;
 }
 
-.chapter p { color: var(--gold); }
+.chapter p { color: var(--gold-ink, var(--gold)); }
 .chapter span { color: var(--text-secondary); }
 
 .layout {
@@ -32,7 +32,7 @@
 .portrait-frame {
   aspect-ratio: 4 / 5;
   overflow: hidden;
-  border: 1px solid rgba(248, 248, 248, 0.18);
+  border: 1px solid var(--border-strong);
   border-radius: var(--radius-sm);
   background: var(--void-2);
 }
@@ -64,14 +64,14 @@
   letter-spacing: -0.045em;
 }
 
-.heading span { display: block; margin-top: 6px; color: #aaa9a2; }
+.heading span { display: block; margin-top: 6px; color: var(--text-secondary); }
 
 .details {
   display: grid;
   gap: 14px;
   margin-top: 28px;
-  padding-left: var(--space-5);
-  border-left: 1px solid var(--gold-dim);
+  padding-inline-start: var(--space-5);
+  border-inline-start: 1px solid var(--gold-dim);
   font-family: var(--font-body);
   font-size: 0.65rem;
   line-height: 1.8;
@@ -82,7 +82,7 @@
 .details dd { color: var(--text-primary); }
 
 .biography { max-width: 54ch; margin-top: 28px; }
-.biography p { color: #b5b5af; font-size: 0.82rem; line-height: 1.95; }
+.biography p { color: var(--text-secondary); font-size: 0.82rem; line-height: 1.95; }
 .biography p:first-child { color: var(--text-primary); font-size: 0.94rem; line-height: 1.85; }
 .biography p + p { margin-top: var(--space-5); }
 
@@ -98,23 +98,24 @@
 .approach { list-style: none; counter-reset: principle; }
 .approach li {
   position: relative;
-  padding: 20px 0 20px 32px;
-  border-bottom: 1px solid rgba(248, 248, 248, 0.1);
+  padding-block: 20px;
+  padding-inline: 32px 0;
+  border-bottom: 1px solid var(--border);
   counter-increment: principle;
 }
 .approach li::before {
   position: absolute;
   top: 23px;
-  left: 0;
+  inset-inline-start: 0;
   content: counter(principle, decimal-leading-zero);
   color: var(--gold-dim);
   font-size: 0.55rem;
 }
 .approach h4 { color: var(--text-primary); font-size: 0.77rem; font-weight: 500; line-height: 1.6; }
-.approach p { margin-top: 8px; color: #aaa9a2; font-size: 0.73rem; line-height: 1.9; }
+.approach p { margin-top: 8px; color: var(--text-secondary); font-size: 0.73rem; line-height: 1.9; }
 
-.focus { margin-top: 24px; color: #b5b5af; font-size: 0.61rem; line-height: 1.9; }
-.focus span { display: block; margin-bottom: 5px; color: var(--gold); font-size: 0.56rem; }
+.focus { margin-top: 24px; color: var(--text-secondary); font-size: 0.61rem; line-height: 1.9; }
+.focus span { display: block; margin-bottom: 5px; color: var(--gold-ink, var(--gold)); font-size: 0.56rem; }
 
 @media (max-width: 1000px) {
   .about { padding: var(--section-spacing-mobile) 0; }
@@ -137,7 +138,7 @@
 
 @media (max-width: 380px) {
   .chapter span { display: none; }
-  .details { padding-left: 12px; font-size: 0.61rem; }
+  .details { padding-inline-start: 12px; font-size: 0.61rem; }
   .details div { grid-template-columns: 66px minmax(0, 1fr); gap: 8px; }
   .biography p:first-child { font-size: 0.88rem; }
   .biography p { font-size: 0.77rem; }
@@ -150,3 +151,19 @@
     transition: none;
   }
 }
+
+/* Luxury Light Mode � independent of the original dark presentation. */
+:global([data-theme='light']) .about { background: var(--bg-primary); }
+:global([data-theme='light']) .chapter { border-bottom-color: var(--rule-gold); }
+:global([data-theme='light']) .portrait { position: relative; padding: 10px; border: 1px solid var(--border); background: var(--surface); box-shadow: var(--shadow-surface); }
+:global([data-theme='light']) .portrait::before { content: ''; position: absolute; top: -1px; inset-inline-start: -1px; width: 40px; height: 40px; border-top: 1px solid var(--gold); border-inline-start: 1px solid var(--gold); pointer-events: none; }
+:global([data-theme='light']) .portrait-frame { border-radius: 0; border-color: var(--border-subtle); }
+:global([data-theme='light']) .portrait-caption { padding-inline: 4px; margin-block: 14px 4px; }
+:global([data-theme='light']) .heading { font-size: clamp(2rem, 3.5vw, 3rem); }
+:global([data-theme='light']) .heading span { font-weight: 500; }
+:global([data-theme='light']) .details { padding-block: 8px; border-inline-start-color: var(--gold); }
+:global([data-theme='light']) .biography p { font-family: var(--font-editorial); font-size: 1rem; line-height: 1.9; }
+:global([data-theme='light']) .biography p:first-child { font-size: 1.12rem; line-height: 1.8; }
+:global([data-theme='light']) .approach-label { color: var(--gold-ink); }
+:global([data-theme='light']) .approach h4 { font-family: var(--font-heading); font-size: .96rem; font-weight: 600; }
+:global([data-theme='light']) .approach p { font-family: var(--font-editorial); font-size: .94rem; }

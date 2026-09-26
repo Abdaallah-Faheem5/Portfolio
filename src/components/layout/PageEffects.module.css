@@ -1,6 +1,6 @@
 ﻿.scroll-progress {
   width: 100%; height: 2px;
-  position: fixed; top: 0; left: 0; z-index: 999;
+  position: fixed; top: 0; inset-inline-start: 0; z-index: 999;
   background: linear-gradient(90deg, var(--gold), var(--gold-light));
   pointer-events: none;
   transform: scaleX(0); transform-origin: left;
@@ -21,3 +21,10 @@
     linear-gradient(90deg, rgba(212,175,55,0.03) 1px, transparent 1px);
   background-size: 60px 60px;
 }
+
+:global([dir='rtl']) .scroll-progress { transform-origin: right; }
+
+/* Luxury Light Mode � independent of the original dark presentation. */
+:global([data-theme='light']) .bg-orbs { background: none; }
+:global([data-theme='light']) .bg-grid { background: none; }
+:global([data-theme='light']) .scroll-progress { height: 1px; background: var(--gold); }

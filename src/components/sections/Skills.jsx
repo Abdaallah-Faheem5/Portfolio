@@ -1,4 +1,4 @@
-import { data } from '../../data/index.js';
+import { usePortfolio } from '../../context/Preferences.jsx';
 import { useScrollReveal } from '../../hooks/useScrollReveal.js';
 import { AppIcon } from '../AppIcon.jsx';
 import styles from './Skills.module.css';
@@ -26,6 +26,7 @@ function BentoCell({ skill }) {
 }
 
 export default function Skills() {
+  const { data } = usePortfolio();
   const headerRef = useScrollReveal();
 
   return (

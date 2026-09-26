@@ -1,10 +1,11 @@
 ﻿import { useScrollReveal } from '../../hooks/useScrollReveal.js';
-import { data } from '../../data/index.js';
+import { usePortfolio } from '../../context/Preferences.jsx';
 import { AppIcon } from '../AppIcon.jsx';
 import styles from './Contact.module.css';
 import shared from '../../styles/sections.module.css';
 
 export default function Contact() {
+  const { data, t, language } = usePortfolio();
   const headerRef = useScrollReveal();
   const contacts = data.contactMethods.flatMap((contact) => {
     const value = data.personal[contact.field];
@@ -30,13 +31,13 @@ export default function Contact() {
                 className={`${styles['contact-link']} ${contact.field === 'email' ? styles.primary : ''}`}
                 target={contact.external ? '_blank' : undefined}
                 rel={contact.external ? 'noopener noreferrer' : undefined}
-                aria-label={`${contact.label}: ${contact.value}${contact.external ? ' (opens in a new tab)' : ''}`}>
+                aria-label={`${contact.label}: ${contact.value}${contact.external ? ` (${t('opens in a new tab')})` : ''}`}>
                 <span className={styles.icon}><AppIcon name={contact.icon} /></span>
                 <span className={styles.info}>
                   <span className={styles['contact-label']}>{contact.label}</span>
-                  <span className={styles.value}>{contact.value}</span>
+                  <span className={styles.value}><bdi dir={contact.field === 'phone' || contact.field === 'email' ? 'ltr' : 'auto'}>{contact.value}</bdi></span>
                 </span>
-                <span className={styles.arrow} aria-hidden="true">↗</span>
+                <span className={styles.arrow} aria-hidden="true">{language === 'ar' ? '\u2196' : '\u2197'}</span>
               </a>
             ))}
           </div>

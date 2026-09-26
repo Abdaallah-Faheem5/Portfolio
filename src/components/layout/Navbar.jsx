@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { data } from '../../data/index.js';
+import { usePortfolio } from '../../context/Preferences.jsx';
 import styles from './Navbar.module.css';
+import PreferenceControls from './PreferenceControls.jsx';
 
 export default function Navbar() {
+  const { data, t } = usePortfolio();
   const [menuOpen, setMenuOpen] = useState(false);
   const navRef = useRef(null);
   const toggleRef = useRef(null);
@@ -74,9 +76,9 @@ export default function Navbar() {
   };
 
   return (
-    <nav ref={navRef} className={styles.navbar} aria-label="Primary navigation" data-open={menuOpen}>
+    <nav ref={navRef} className={styles.navbar} aria-label={t('Primary navigation')} data-open={menuOpen}>
       <div className={styles.inner}>
-        <a href="#hero" className={styles.logo} onClick={closeMenu} aria-label="Back to introduction">
+        <a href="#hero" dir="ltr" className={styles.logo} onClick={closeMenu} aria-label={t('Back to introduction')}>
           {data.branding.navbar}
         </a>
 
@@ -85,11 +87,11 @@ export default function Navbar() {
           type="button"
           className={styles.toggle}
           onClick={() => setMenuOpen((open) => !open)}
-          aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-label={t(menuOpen ? 'Close navigation menu' : 'Open navigation menu')}
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
         >
-          <span className={styles['toggle-label']}>Menu</span>
+          <span className={styles['toggle-label']}>{t('Menu')}</span>
           <span className={styles['toggle-icon']} aria-hidden="true">
             <span />
             <span />
@@ -99,9 +101,10 @@ export default function Navbar() {
         <ul id="mobile-menu" className={`${styles.links} ${menuOpen ? styles.open : ''}`}>
           {data.navigation.map((link) => (
             <li key={link}>
-              <a href={`#${link.toLowerCase()}`} onClick={closeMenu}>{link}</a>
+              <a href={`#${link.toLowerCase()}`} onClick={closeMenu}>{t(link)}</a>
             </li>
           ))}
+          <li className={styles.preferences}><PreferenceControls /></li>
         </ul>
       </div>
     </nav>

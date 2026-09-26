@@ -1,0 +1,5 @@
+.controls { display: flex; align-items: center; gap: 4px; }
+.controls button { display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-width: 44px; min-height: 44px; padding: 0 8px; border: 1px solid transparent; border-radius: var(--radius-sm); background: transparent; color: var(--text-secondary); font: 600 .65rem 'JetBrains Mono', monospace; cursor: pointer; }
+.controls button:focus-visible { outline: 2px solid var(--focus-ring, var(--gold)); outline-offset: 2px; }
+.active { color: var(--text-primary); text-decoration: underline; text-underline-offset: 4px; }
+@media (hover: hover) { .controls button:hover { border-color: var(--border); background: var(--void-3); color: var(--text-primary); } }

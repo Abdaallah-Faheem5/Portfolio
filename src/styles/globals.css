@@ -25,3 +25,13 @@ body {
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--void); }
 ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
+
+:lang(ar) { letter-spacing: normal; }
+html[lang='ar'] :is(h1, h2, h3, h4) { line-height: 1.5; letter-spacing: normal; }
+html[lang='ar'] :is(p, a, dt, dd, li, button, span) { letter-spacing: normal; }
+code, pre { direction: ltr; text-align: left; }
+bdi { unicode-bidi: isolate; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html[data-theme='light'] body { transition: background-color 180ms ease, color 180ms ease; }
+}

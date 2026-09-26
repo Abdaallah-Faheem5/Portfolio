@@ -3,15 +3,15 @@
   inset: 0 0 auto;
   z-index: 200;
   height: 72px;
-  background: rgba(0, 0, 0, 0.76);
+  background: var(--navbar-bg);
   border-bottom: 1px solid transparent;
   transition: background-color var(--duration-normal) ease, border-color var(--duration-normal) ease;
 }
 
 .navbar[data-scrolled='true'],
 .navbar[data-open='true'] {
-  background: rgba(10, 10, 10, 0.98);
-  border-bottom-color: rgba(248, 248, 248, 0.08);
+  background: var(--navbar-solid);
+  border-bottom-color: var(--border);
 }
 
 .inner {
@@ -30,7 +30,7 @@
   align-items: center;
   min-height: 44px;
   flex-shrink: 0;
-  color: var(--gold);
+  color: var(--gold-ink, var(--gold));
   font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 700;
@@ -42,16 +42,20 @@
 .links {
   display: flex;
   align-items: center;
-  gap: var(--space-8);
+  gap: clamp(12px, 2vw, 24px);
   list-style: none;
 }
+
+.preferences { flex-shrink: 0; }
+@media (min-width: 769px) { .inner { gap: 16px; } .links a { font-size: .72rem; } }
+@media (max-width: 768px) { .preferences { padding: 8px; border-top: 1px solid var(--border); margin-top: 8px; } }
 
 .links a {
   position: relative;
   display: flex;
   align-items: center;
   min-height: 44px;
-  color: rgba(248, 248, 248, 0.66);
+  color: var(--text-secondary);
   font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 500;
@@ -65,7 +69,7 @@
   content: '';
   position: absolute;
   bottom: 4px;
-  left: 0;
+  inset-inline-start: 0;
   width: 12px;
   height: 2px;
   border-radius: 1px;
@@ -88,7 +92,7 @@
 .logo:focus-visible,
 .links a:focus-visible,
 .toggle:focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--focus-ring, var(--gold));
   outline-offset: 4px;
   border-radius: 3px;
 }
@@ -126,7 +130,7 @@
     gap: var(--space-3);
     min-height: 44px;
     padding: 0 var(--space-3);
-    margin-right: calc(-1 * var(--space-3));
+    margin-inline-end: calc(-1 * var(--space-3));
     border: 0;
     border-radius: var(--radius-sm);
     background: transparent;
@@ -168,7 +172,7 @@
   .links {
     position: absolute;
     top: calc(100% + 8px);
-    right: var(--container-padding-mobile);
+    inset-inline-end: var(--container-padding-mobile);
     width: min(264px, calc(100vw - 40px));
     max-height: calc(100dvh - 96px);
     overflow-y: auto;
@@ -178,7 +182,7 @@
     align-items: stretch;
     gap: 2px;
     padding: var(--space-2);
-    border: 1px solid rgba(248, 248, 248, 0.1);
+    border: 1px solid var(--border);
     border-radius: var(--radius-md);
     background: var(--void-2);
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
@@ -206,9 +210,9 @@
 
   .links a::after {
     top: 50%;
-    right: var(--space-4);
+    inset-inline-end: var(--space-4);
     bottom: auto;
-    left: auto;
+    inset-inline-start: auto;
     width: 4px;
     height: 4px;
     border-radius: 50%;
@@ -216,7 +220,7 @@
   }
 
   .links a[aria-current='location'] {
-    background: rgba(248, 248, 248, 0.04);
+    background: var(--surface-hover);
   }
 
   .links a[aria-current='location']::after,
@@ -238,4 +242,25 @@
   .toggle-icon span {
     transition: none;
   }
+}
+
+:global([dir='rtl']) .links a::after { transform-origin: right; }
+
+/* Luxury Light Mode � independent of the original dark presentation. */
+:global([data-theme='light']) .navbar {
+  background: var(--navbar-bg);
+  border-bottom-color: var(--border);
+  box-shadow: none;
+}
+:global([data-theme='light']) .logo { color: var(--text-primary); letter-spacing: -.06em; }
+:global([data-theme='light']) .links a { color: var(--text-secondary); }
+:global([data-theme='light']) .links a[aria-current='location'] { color: var(--text-primary); }
+:global([data-theme='light']) .links a::after { height: 1px; width: 20px; background: var(--gold); }
+@media (hover: hover) {
+  :global([data-theme='light']) .logo:hover,
+  :global([data-theme='light']) .links a:hover { color: var(--gold-ink); }
+}
+@media (max-width: 768px) {
+  :global([data-theme='light']) .links { background: var(--surface); border-color: var(--border); border-radius: 4px; box-shadow: var(--shadow-menu); }
+  :global([data-theme='light']) .links a::after { width: 5px; height: 5px; }
 }

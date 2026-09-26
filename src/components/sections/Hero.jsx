@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { data } from '../../data/index.js';
+import { usePortfolio } from '../../context/Preferences.jsx';
+import { data as codeData } from '../../data/index.js';
 import styles from './Hero.module.css';
 
 function normalizeUrl(url) {
@@ -9,6 +10,7 @@ function normalizeUrl(url) {
 }
 
 export default function Hero() {
+  const { data, t, language } = usePortfolio();
   const heroRef = useRef(null);
   const anchorRef = useRef(null);
   const layerRef = useRef(null);
@@ -38,11 +40,12 @@ export default function Hero() {
       const progress = reduced.matches ? 0 : Math.min(1, Math.max(0, -heroTop / (hero.offsetHeight * 0.85)));
       const eased = progress * progress * (3 - 2 * progress);
       const mobile = window.innerWidth <= 768;
-      const x = bounds.left + (window.innerWidth - bounds.width * 0.82 - bounds.left) * eased;
+      const rtl = document.documentElement.dir === 'rtl';
+      const x = bounds.left + ((rtl ? 0 : window.innerWidth - bounds.width * 0.82) - bounds.left) * eased;
       const y = (bounds.top - window.scrollY) * (1 - eased) + window.innerHeight * 0.25 * eased;
       stage.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${1 + eased * (mobile ? 0.08 : 0.16)})`;
       layer.style.opacity = String(1 - eased * (mobile ? 0.66 : 0.58));
-      hero.style.setProperty('--hero-exit-x', `${-Math.min(window.innerWidth * 0.25, 240) * eased}px`);
+      hero.style.setProperty('--hero-exit-x', `${(rtl ? 1 : -1) * Math.min(window.innerWidth * 0.25, 240) * eased}px`);
       hero.style.setProperty('--hero-exit-opacity', String(Math.max(0, 1 - progress * 1.6)));
       hero.dataset.departed = String(progress >= 0.64);
       inView = y + bounds.height > 0 && y < window.innerHeight;
@@ -76,7 +79,7 @@ export default function Hero() {
 
     import('./heroLaptop.js').then(({ createHeroLaptop }) => {
       if (disposed) return;
-      laptop = createHeroLaptop(stage, { name: data.hero.name, location: data.personal.location });
+      laptop = createHeroLaptop(stage, { name: codeData.hero.name, location: codeData.personal.location });
       if (!laptop) {
         anchor.dataset.failed = 'true';
         return;
@@ -140,10 +143,10 @@ export default function Hero() {
 
             <div className={styles.actions}>
               <a href="#projects" className={styles.primary}>
-                {data.hero.workLabel}<span aria-hidden="true">↗</span>
+                {data.hero.workLabel}<span aria-hidden="true">{language === 'ar' ? '\u2196' : '\u2197'}</span>
               </a>
               <a href="#contact" className={styles.secondary}>
-                {data.hero.contactLabel}<span aria-hidden="true">→</span>
+                {data.hero.contactLabel}<span aria-hidden="true">{language === 'ar' ? '\u2190' : '\u2192'}</span>
               </a>
             </div>
 
@@ -154,14 +157,14 @@ export default function Hero() {
                 target={cvExternal ? '_blank' : undefined}
                 rel={cvExternal ? 'noreferrer' : undefined}
               >
-                {data.hero.cvLabel}<span aria-hidden="true">↗</span>
+                {data.hero.cvLabel}<span aria-hidden="true">{language === 'ar' ? '\u2196' : '\u2197'}</span>
               </a>
             )}
           </div>
 
           <div className={styles.visual}>
             <div className={styles['visual-label']} aria-hidden="true">
-              <span>01 / Under the hood</span><span className={styles.cross}>+</span>
+              <span>{t('01 / Under the hood')}</span><span className={styles.cross}>+</span>
             </div>
             <div ref={anchorRef} className={styles['laptop-anchor']} aria-hidden="true">
             <div className={styles.editor}>
@@ -170,10 +173,10 @@ export default function Hero() {
                 <span>developer.config.js</span>
                 <span className={styles.language}>JS</span>
               </div>
-              <pre className={styles.code}><code>
+              <pre className={styles.code} dir="ltr"><code>
                 <span className={styles['code-line']}><span className={styles.keyword}>const</span>{' developer = {'}</span>
-                <span className={styles['code-line']}>{'  name: '}<span className={styles.string}>{`"${data.hero.name}"`}</span>,</span>
-                <span className={styles['code-line']}>{'  location: '}<span className={styles.string}>{`"${data.personal.location}"`}</span>,</span>
+                <span className={styles['code-line']}>{'  name: '}<span className={styles.string}>{`"${codeData.hero.name}"`}</span>,</span>
+                <span className={styles['code-line']}>{'  location: '}<span className={styles.string}>{`"${codeData.personal.location}"`}</span>,</span>
                 <span className={styles['code-line']}>{'  stack: ['}</span>
                 <span className={styles['code-line']}>{'    '}<span className={styles.string}>"React"</span>,</span>
                 <span className={styles['code-line']}>{'    '}<span className={styles.string}>"Node.js"</span>,</span>
@@ -183,15 +186,15 @@ export default function Hero() {
                 <span className={styles['code-line']}>{'};'}</span>
               </code></pre>
               <div className={styles.flow}>
-                <span>Interface</span><span className={styles.connector}>→</span>
-                <span>API</span><span className={styles.connector}>→</span><span>Data</span>
+                <span>{t('Interface')}</span><span className={styles.connector} aria-hidden="true">{language === 'ar' ? '\u2190' : '\u2192'}</span>
+                <span>API</span><span className={styles.connector} aria-hidden="true">{language === 'ar' ? '\u2190' : '\u2192'}</span><span>{t('Data')}</span>
               </div>
             </div>
             </div>
-            <button type="button" className={styles['rotation-toggle']} onClick={toggleRotation} aria-pressed={paused} aria-label="Pause laptop rotation">
-              {paused ? 'Resume rotation' : 'Pause rotation'}
+            <button type="button" className={styles['rotation-toggle']} onClick={toggleRotation} aria-pressed={paused} aria-label={t(paused ? 'Resume rotation' : 'Pause rotation')}>
+              {t(paused ? 'Resume rotation' : 'Pause rotation')}
             </button>
-            <p className={styles['visual-note']} aria-hidden="true">Frontend precision. Backend clarity.</p>
+            <p className={styles['visual-note']} aria-hidden="true">{t('Frontend precision. Backend clarity.')}</p>
           </div>
         </div>
 

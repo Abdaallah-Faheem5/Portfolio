@@ -1,14 +1,20 @@
 ﻿.footer { position: relative; z-index: 1; padding: 0 var(--container-padding) 32px; }
-.footer-inner { max-width: calc(var(--container-width) - 2 * var(--container-padding)); margin: 0 auto; padding-top: 24px; border-top: 1px solid #35352e; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; }
+.footer-inner { max-width: calc(var(--container-width) - 2 * var(--container-padding)); margin: 0 auto; padding-top: 24px; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; }
 .identity { min-width: 0; }
-.footer-logo { display: inline-flex; align-items: center; min-height: 44px; color: var(--gold); font-family: var(--font-heading); font-weight: 700; font-size: 1rem; text-decoration: none; }
-.role { color: #aaa9a2; font-size: 0.65rem; }
+.footer-logo { display: inline-flex; align-items: center; min-height: 44px; color: var(--gold-ink, var(--gold)); font-family: var(--font-heading); font-weight: 700; font-size: 1rem; text-decoration: none; }
+.role { color: var(--text-secondary); font-size: 0.65rem; }
 .socials { display: flex; flex-wrap: wrap; gap: 20px; }
-.socials a { display: inline-flex; align-items: center; min-height: 44px; color: #c3c3bb; font-size: 0.7rem; text-decoration: none; }
-.socials span { color: var(--gold); margin-left: 6px; }
-.footer-copy { flex-basis: 100%; color: #aaa9a2; font-size: 0.65rem; line-height: 1.8; overflow-wrap: anywhere; }
+.socials a { display: inline-flex; align-items: center; min-height: 44px; color: var(--text-soft); font-size: 0.7rem; text-decoration: none; }
+.socials span { color: var(--gold-ink, var(--gold)); margin-inline-start: 6px; }
+.footer-copy { flex-basis: 100%; color: var(--text-secondary); font-size: 0.65rem; line-height: 1.8; overflow-wrap: anywhere; }
 .footer a { transition: color var(--duration-fast); }
-.footer a:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 4px; border-radius: 3px; }
-@media (hover: hover) { .footer a:hover { color: var(--gold-light); } }
+.footer a:focus-visible { outline: 2px solid var(--focus-ring, var(--gold-light)); outline-offset: 4px; border-radius: 3px; }
+@media (hover: hover) { .footer a:hover { color: var(--gold-ink, var(--gold-light)); } }
 @media (max-width: 768px) { .footer { padding: 0 var(--container-padding-mobile) 24px; } .footer-inner { max-width: none; } }
 @media (prefers-reduced-motion: reduce) { .footer a { transition: none; } }
+
+/* Luxury Light Mode � independent of the original dark presentation. */
+:global([data-theme='light']) .footer { background: var(--bg-secondary); }
+:global([data-theme='light']) .footer-inner { border-top-color: var(--rule-gold); }
+:global([data-theme='light']) .footer-logo { color: var(--text-primary); }
+:global([data-theme='light']) .footer-copy { color: var(--text-muted); }

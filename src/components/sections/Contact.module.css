@@ -1,21 +1,21 @@
 ﻿.contact-section { padding: var(--section-spacing) 0; scroll-margin-top: 80px; }
 .contact-wrap { max-width: 760px; margin: 0 auto; }
 .header { text-align: center; }
-.label { color: var(--gold); font-size: 0.65rem; letter-spacing: 0.12em; margin-bottom: 12px; }
+.label { color: var(--gold-ink, var(--gold)); font-size: 0.65rem; letter-spacing: 0.12em; margin-bottom: 12px; }
 .heading { font-family: var(--font-heading); font-size: clamp(2rem, 3.8vw, 2.8rem); font-weight: 700; line-height: 1.2; letter-spacing: -0.04em; }
-.contact-sub { color: #aaa9a2; font-size: 0.8rem; line-height: 1.9; margin: 20px auto 0; max-width: 52ch; }
+.contact-sub { color: var(--text-secondary); font-size: 0.8rem; line-height: 1.9; margin: 20px auto 0; max-width: 52ch; }
 .actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 24px; margin-top: 40px; }
-.contact-link { display: flex; align-items: center; gap: 14px; min-height: 72px; padding: 16px 0; border-bottom: 1px solid #35352e; color: var(--text-primary); text-decoration: none; transition: color var(--duration-fast), border-color var(--duration-fast), background-color var(--duration-fast); }
+.contact-link { display: flex; align-items: center; gap: 14px; min-height: 72px; padding: 16px 0; border-bottom: 1px solid var(--border); color: var(--text-primary); text-decoration: none; transition: color var(--duration-fast), border-color var(--duration-fast), background-color var(--duration-fast); }
 .primary { grid-column: 1 / -1; padding: 18px 20px; border: 1px solid var(--gold-dim); border-radius: var(--radius-sm); background: rgba(212,175,55,0.04); }
-.icon { display: flex; flex-shrink: 0; color: var(--gold); }
+.icon { display: flex; flex-shrink: 0; color: var(--gold-ink, var(--gold)); }
 .icon svg { width: 20px; height: 20px; }
 .info { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
-.contact-label { color: #aaa9a2; font-size: 0.6rem; letter-spacing: 0.06em; }
+.contact-label { color: var(--text-secondary); font-size: 0.6rem; letter-spacing: 0.06em; }
 .value { font-size: 0.76rem; overflow-wrap: anywhere; line-height: 1.7; }
 .primary .value { font-size: 0.9rem; }
-.arrow { color: var(--gold); flex-shrink: 0; }
-.contact-link:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 5px; }
-@media (hover: hover) { .contact-link:hover { border-color: var(--gold); color: var(--gold-light); } .primary:hover { background: rgba(212,175,55,0.08); } }
+.arrow { color: var(--gold-ink, var(--gold)); flex-shrink: 0; }
+.contact-link:focus-visible { outline: 2px solid var(--focus-ring, var(--gold-light)); outline-offset: 5px; }
+@media (hover: hover) { .contact-link:hover { border-color: var(--gold); color: var(--gold-ink, var(--gold-light)); } .primary:hover { background: rgba(212,175,55,0.08); } }
 @media (max-width: 768px) { .contact-section { padding: var(--section-spacing-mobile) 0; } }
 @media (max-width: 480px) {
   .contact-section { padding: 72px 0; }
@@ -25,3 +25,18 @@
   .contact-link { gap: 12px; }
 }
 @media (prefers-reduced-motion: reduce) { .contact-link { transition: none; } }
+
+/* Luxury Light Mode � independent of the original dark presentation. */
+:global([data-theme='light']) .contact-section { background: var(--closing-tonal); padding-block: clamp(80px, 10vw, 144px); }
+:global([data-theme='light']) .label { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 24px; }
+:global([data-theme='light']) .label::before,
+:global([data-theme='light']) .label::after { content: ''; width: 28px; height: 1px; background: var(--rule-gold); }
+:global([data-theme='light']) .heading { font-size: clamp(2.5rem, 5.5vw, 4.5rem); line-height: 1.1; letter-spacing: -.055em; }
+:global([data-theme='light']) .contact-sub { font-family: var(--font-editorial); font-size: 1.05rem; line-height: 1.85; max-width: 46ch; }
+:global([data-theme='light']) .actions { margin-top: 48px; }
+:global([data-theme='light']) .primary { background: var(--metallic-accent); color: var(--on-accent); border-color: var(--gold); border-radius: 2px; box-shadow: var(--shadow-button); padding-block: 24px; }
+:global([data-theme='light']) .primary :is(.icon, .arrow, .contact-label) { color: var(--on-accent); }
+:global([data-theme='light']) .primary .value { font-size: clamp(.8rem, 2vw, 1rem); }
+@media (hover: hover) {
+  :global([data-theme='light']) .primary:hover { background: var(--accent-hover); color: var(--on-accent); border-color: var(--accent-hover); box-shadow: var(--shadow-button-hover); }
+}

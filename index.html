@@ -3,6 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (() => {
+      let theme = 'dark', language = 'en';
+      try {
+        if (localStorage.getItem('portfolio-theme') === 'light') theme = 'light';
+        if (localStorage.getItem('portfolio-language') === 'ar') language = 'ar';
+      } catch {}
+      document.documentElement.dataset.theme = theme;
+      document.documentElement.lang = language;
+      document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+    })();
+  </script>
   <title>Faheem</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />

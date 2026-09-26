@@ -1,9 +1,10 @@
-﻿import { data } from '../../data/index.js';
+﻿import { usePortfolio } from '../../context/Preferences.jsx';
 import { useScrollReveal } from '../../hooks/useScrollReveal.js';
 import styles from './Experience.module.css';
 import shared from '../../styles/sections.module.css';
 
 export default function Experience() {
+  const { data, t } = usePortfolio();
   const headerRef = useScrollReveal();
 
   return (
@@ -24,7 +25,7 @@ export default function Experience() {
                 <h3 className={styles.title}>{item.title}</h3>
                 <p className={styles.organization}>{item.company}</p>
                 <p className={styles.description}>{item.desc}</p>
-                <ul className={styles.tags} aria-label={`${item.title} focus`}>
+                <ul className={styles.tags} aria-label={`${item.title} - ${t('focus')}`}>
                   {item.focus.map((tag) => <li key={tag} className={styles.tag}>{tag}</li>)}
                 </ul>
               </div>

@@ -1,10 +1,11 @@
-import { data } from '../../data/index.js';
+import { usePortfolio } from '../../context/Preferences.jsx';
 import { useScrollReveal } from '../../hooks/useScrollReveal.js';
 import styles from './About.module.css';
 import shared from '../../styles/sections.module.css';
 import portrait from '../../assets/me.jpg';
 
 export default function About() {
+  const { data, t } = usePortfolio();
   const profileRef = useScrollReveal();
   const narrativeRef = useScrollReveal();
 
@@ -16,7 +17,7 @@ export default function About() {
             <div className={styles['portrait-frame']}>
               <img
                 src={portrait}
-                alt={`Portrait of ${data.hero.name}`}
+                alt={`${t('Portrait of')} ${data.hero.name}`}
                 width="1248"
                 height="1600"
                 loading="lazy"
@@ -24,7 +25,7 @@ export default function About() {
                 className={styles['portrait-image']}
               />
             </div>
-            <figcaption className={styles['portrait-caption']}>01 / PROFILE</figcaption>
+            <figcaption className={styles['portrait-caption']}>{t('01 / PROFILE')}</figcaption>
           </figure>
 
           <div ref={narrativeRef} className={`${shared.reveal} ${styles.narrative}`}>
@@ -44,7 +45,7 @@ export default function About() {
 
             <dl className={styles.details}>
               <div>
-                <dt>Based in</dt>
+                <dt>{t('Based in')}</dt>
                 <dd>{data.personal.location}</dd>
               </div>
               {data.about.details.map((detail) => (

@@ -14,7 +14,22 @@ import ecommerceDashboard3 from '../assets/EZHome/dashpord3.png';
 import ecommerceDashboard4 from '../assets/EZHome/dashpord4.png';
 import ecommerceDashboard5 from '../assets/EZHome/dashpord5.png';
 import ecommerceFooter from '../assets/EZHome/foter.png';
-import companyPreview from '../assets/Jodran.png';
+import companyPreview from '../assets/jodran/Jodran.png';
+import companyVideo from '../assets/jodran/jodran.mp4';
+import company190645 from '../assets/jodran/Screenshot 2026-09-26 190645.png';
+import company190703 from '../assets/jodran/Screenshot 2026-09-26 190703.png';
+import company190727 from '../assets/jodran/Screenshot 2026-09-26 190727.png';
+import company190743 from '../assets/jodran/Screenshot 2026-09-26 190743.png';
+import company190803 from '../assets/jodran/Screenshot 2026-09-26 190803.png';
+import company190818 from '../assets/jodran/Screenshot 2026-09-26 190818.png';
+import company190849 from '../assets/jodran/Screenshot 2026-09-26 190849.png';
+import company190931 from '../assets/jodran/Screenshot 2026-09-26 190931.png';
+import company190949 from '../assets/jodran/Screenshot 2026-09-26 190949.png';
+import company191018 from '../assets/jodran/Screenshot 2026-09-26 191018.png';
+import company191037 from '../assets/jodran/Screenshot 2026-09-26 191037.png';
+import company191057 from '../assets/jodran/Screenshot 2026-09-26 191057.png';
+import company191108 from '../assets/jodran/Screenshot 2026-09-26 191108.png';
+import company191128 from '../assets/jodran/Screenshot 2026-09-26 191128.png';
 import restaurantPreview from '../assets/restaurant.png';
 import amjadPreview from '../assets/amjad.png';
 
@@ -174,21 +189,21 @@ export const data = {
       role: 'Backend development',
       features: ['Authentication', 'Product management', 'Cart and orders', 'Wishlist'],
       images: [
-        { src: ecommercePreview, group: 'Storefront', width: 1882, height: 873, alt: 'EZ-Home e-commerce website preview' },
-        { src: ecommerceProduct, group: 'Storefront', width: 1867, height: 870, alt: 'EZ-Home product page' },
-        { src: ecommerceWishlist, group: 'Storefront', width: 1887, height: 875, alt: 'EZ-Home wishlist' },
-        { src: ecommerceCart, group: 'Cart & checkout', width: 1896, height: 882, alt: 'EZ-Home shopping cart' },
-        { src: ecommerceCart1, group: 'Cart & checkout', width: 890, height: 761, alt: 'EZ-Home cart flow, view 1' },
-        { src: ecommerceCart2, group: 'Cart & checkout', width: 797, height: 666, alt: 'EZ-Home cart flow, view 2' },
-        { src: ecommerceCart3, group: 'Cart & checkout', width: 687, height: 576, alt: 'EZ-Home cart flow, view 3' },
-        { src: ecommerceLogin, group: 'Account', width: 920, height: 795, alt: 'EZ-Home login page' },
-        { src: ecommerceSignup, group: 'Account', width: 737, height: 831, alt: 'EZ-Home sign-up page' },
-        { src: ecommerceDashboard1, group: 'Dashboard', width: 1891, height: 873, alt: 'EZ-Home dashboard, view 1' },
-        { src: ecommerceDashboard2, group: 'Dashboard', width: 1902, height: 880, alt: 'EZ-Home dashboard, view 2' },
-        { src: ecommerceDashboard3, group: 'Dashboard', width: 1902, height: 867, alt: 'EZ-Home dashboard, view 3' },
-        { src: ecommerceDashboard4, group: 'Dashboard', width: 1912, height: 881, alt: 'EZ-Home dashboard, view 4' },
-        { src: ecommerceDashboard5, group: 'Dashboard', width: 1907, height: 865, alt: 'EZ-Home dashboard, view 5' },
-        { src: ecommerceFooter, group: 'Storefront', width: 1897, height: 877, alt: 'EZ-Home footer' },
+        { src: ecommercePreview, width: 1882, height: 873, alt: 'EZ-Home e-commerce website preview' },
+        { src: ecommerceProduct, width: 1867, height: 870, alt: 'EZ-Home product page' },
+        { src: ecommerceWishlist, width: 1887, height: 875, alt: 'EZ-Home wishlist' },
+        { src: ecommerceCart, width: 1896, height: 882, alt: 'EZ-Home shopping cart' },
+        { src: ecommerceCart1, width: 890, height: 761, alt: 'EZ-Home cart flow, view 1' },
+        { src: ecommerceCart2, width: 797, height: 666, alt: 'EZ-Home cart flow, view 2' },
+        { src: ecommerceCart3, width: 687, height: 576, alt: 'EZ-Home cart flow, view 3' },
+        { src: ecommerceLogin, width: 920, height: 795, alt: 'EZ-Home login page' },
+        { src: ecommerceSignup, width: 737, height: 831, alt: 'EZ-Home sign-up page' },
+        { src: ecommerceDashboard1, width: 1891, height: 873, alt: 'EZ-Home dashboard, view 1' },
+        { src: ecommerceDashboard2, width: 1902, height: 880, alt: 'EZ-Home dashboard, view 2' },
+        { src: ecommerceDashboard3, width: 1902, height: 867, alt: 'EZ-Home dashboard, view 3' },
+        { src: ecommerceDashboard4, width: 1912, height: 881, alt: 'EZ-Home dashboard, view 4' },
+        { src: ecommerceDashboard5, width: 1907, height: 865, alt: 'EZ-Home dashboard, view 5' },
+        { src: ecommerceFooter, width: 1897, height: 877, alt: 'EZ-Home footer' },
       ],
       video: { src: ecommerceVideo, type: 'video/mp4' },
       image: ecommercePreview,
@@ -204,7 +219,24 @@ export const data = {
       shortDescription: 'A corporate portfolio with interactive service showcases.',
       purpose: 'Present company services and documents through a responsive corporate portfolio.',
       features: ['Interactive 3D experiences', 'Animated service showcases', 'Document management sections', 'Responsive design'],
-      images: [{ src: companyPreview, width: 1887, height: 867, alt: 'JODRAN AL KHALEEJ company portfolio preview' }],
+      images: [
+        { src: companyPreview, width: 1887, height: 867, alt: 'JODRAN AL KHALEEJ company portfolio preview' },
+        { src: company190645, width: 1891, height: 867, alt: 'JODRAN AL KHALEEJ - Company introduction and history' },
+        { src: company190703, width: 1868, height: 862, alt: 'JODRAN AL KHALEEJ - Company values and contact footer' },
+        { src: company190727, width: 1887, height: 872, alt: 'JODRAN AL KHALEEJ - Projects showcase' },
+        { src: company190743, width: 1883, height: 875, alt: 'JODRAN AL KHALEEJ - Project capabilities' },
+        { src: company190803, width: 1887, height: 870, alt: 'JODRAN AL KHALEEJ - Client partnerships' },
+        { src: company190818, width: 1885, height: 867, alt: 'JODRAN AL KHALEEJ - Client relationships' },
+        { src: company190849, width: 1882, height: 868, alt: 'JODRAN AL KHALEEJ - Services and specializations' },
+        { src: company190931, width: 1881, height: 870, alt: 'JODRAN AL KHALEEJ - Construction and infrastructure services' },
+        { src: company190949, width: 1885, height: 872, alt: 'JODRAN AL KHALEEJ - Leadership introduction' },
+        { src: company191018, width: 1887, height: 861, alt: 'JODRAN AL KHALEEJ - Engineering and management team' },
+        { src: company191037, width: 1886, height: 866, alt: 'JODRAN AL KHALEEJ - Corporate credentials introduction' },
+        { src: company191057, width: 1883, height: 862, alt: 'JODRAN AL KHALEEJ - Registrations and certificates' },
+        { src: company191108, width: 1878, height: 865, alt: 'JODRAN AL KHALEEJ - Equipment fleet introduction' },
+        { src: company191128, width: 1882, height: 870, alt: 'JODRAN AL KHALEEJ - Equipment fleet catalog' },
+      ],
+      video: { src: companyVideo, type: 'video/mp4' },
       image: companyPreview,
       desc: 'High-end corporate portfolio built with React and Three.js, featuring interactive 3D experiences, animated service showcases, document management sections, and responsive modern design.',
       tech: ['React', 'Three.js', 'CSS'],

@@ -1,7 +1,7 @@
 .skills-section { padding: var(--section-spacing) 0; scroll-margin-top: 80px; }
 
 .section-header { text-align: center; margin-bottom: 56px; }
-.section-label { margin-bottom: var(--space-3); color: var(--gold); font-size: 0.61rem; letter-spacing: 0.12em; }
+.section-label { margin-bottom: var(--space-3); color: var(--gold-ink, var(--gold)); font-size: 0.61rem; letter-spacing: 0.12em; }
 .section-title { font-family: var(--font-heading); color: var(--text-primary); font-size: clamp(2rem, 3.8vw, 2.8rem); font-weight: 700; line-height: 1.2; letter-spacing: -0.04em; }
 
 .bento-grid {
@@ -13,8 +13,8 @@
 
 .bento-cell {
   min-width: 0;
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(212,175,55,0.1);
+  background: var(--surface-card);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg); padding: var(--space-6);
   position: relative; overflow: hidden;
   cursor: default;
@@ -30,7 +30,7 @@
 }
 
 .cell-top-line {
-  position: absolute; top: 0; left: 24px; width: 28px; height: 1px;
+  position: absolute; top: 0; inset-inline-start: 24px; width: 28px; height: 1px;
   background: var(--gold);
   opacity: 0; transition: opacity var(--duration-normal);
 }
@@ -39,16 +39,16 @@
 .cell-2x1 { grid-column: span 2; }
 .cell-quote { grid-column: span 2; }
 
-.skill-icon { width: 28px; height: 28px; margin-bottom: var(--space-4); display: flex; align-items: center; justify-content: center; color: #c8c8c2; }
+.skill-icon { width: 28px; height: 28px; margin-bottom: var(--space-4); display: flex; align-items: center; justify-content: center; color: var(--text-soft); }
 .skill-icon svg { display: block; width: 24px; height: 24px; flex-shrink: 0; }
 .skill-name {
   font-family: var(--font-heading); font-weight: 700; font-size: 1rem;
   color: var(--text-primary); margin-bottom: 10px; line-height: 1.35; letter-spacing: -0.02em;
 }
-.skill-desc { font-size: 0.72rem; color: #aaa9a2; line-height: 1.85; overflow-wrap: anywhere; }
+.skill-desc { font-size: 0.72rem; color: var(--text-secondary); line-height: 1.85; overflow-wrap: anywhere; }
 
 .skill-tags { display: flex; flex-wrap: wrap; gap: 6px 8px; margin-top: var(--space-4); }
-.tag { max-width: 100%; padding: 4px 9px; border: 1px solid rgba(248,248,248,0.12); border-radius: var(--radius-pill); color: #c0c0ba; background: rgba(255,255,255,0.025); font-size: 0.6rem; line-height: 1.6; overflow-wrap: anywhere; }
+.tag { max-width: 100%; padding: 4px 9px; border: 1px solid var(--border); border-radius: var(--radius-pill); color: var(--text-soft); background: var(--surface-card); font-size: 0.6rem; line-height: 1.6; overflow-wrap: anywhere; }
 
 
 /* Quote cell */
@@ -59,13 +59,13 @@
 }
 .quote-mark {
   font-family: var(--font-heading); font-size: 3rem; font-weight: 700;
-  color: var(--gold); line-height: 0.8; margin-bottom: var(--space-2);
+  color: var(--gold-ink, var(--gold)); line-height: 0.8; margin-bottom: var(--space-2);
   opacity: 0.5;
 }
 .quote-body {
   font-family: var(--font-heading); font-weight: 700; font-size: 1.05rem;
   line-height: 1.5;
-  color: #d8d8d1;
+  color: var(--text-soft);
 }
 
 @media(max-width:1024px) {
@@ -88,4 +88,16 @@
 @media (prefers-reduced-motion: reduce) {
   .skills-section .section-header { opacity: 1; transform: none; transition: none; }
   .bento-cell, .cell-top-line { transition: none; }
+}
+
+/* Luxury Light Mode � independent of the original dark presentation. */
+/* Color and surface changes only: preserve the bento geometry, spacing and icons. */
+:global([data-theme='light']) .skills-section { background: var(--bg-secondary); border-block: 1px solid var(--border-subtle); }
+:global([data-theme='light']) .bento-cell { background: var(--surface); border-color: var(--border); box-shadow: var(--shadow-surface); }
+:global([data-theme='light']) .skill-icon { color: var(--gold-ink); }
+:global([data-theme='light']) .cell-top-line { opacity: .65; }
+:global([data-theme='light']) .tag { background: var(--surface-hover); border-color: var(--border-subtle); }
+:global([data-theme='light']) .cell-quote { background: var(--surface-hover); }
+@media (hover: hover) and (pointer: fine) {
+  :global([data-theme='light']) .bento-cell:hover { background: var(--surface-raised); border-color: var(--rule-gold); }
 }
