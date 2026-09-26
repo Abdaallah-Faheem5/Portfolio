@@ -1,4 +1,19 @@
-import ecommercePreview from '../assets/EZ-Home.png';
+import ecommercePreview from '../assets/EZHome/EZ-Home.png';
+import ecommerceVideo from '../assets/EZHome/Ez-Home.mp4';
+import ecommerceProduct from '../assets/EZHome/product.png';
+import ecommerceWishlist from '../assets/EZHome/fev.png';
+import ecommerceCart from '../assets/EZHome/cart.png';
+import ecommerceCart1 from '../assets/EZHome/cart1.png';
+import ecommerceCart2 from '../assets/EZHome/cart2.png';
+import ecommerceCart3 from '../assets/EZHome/cart3.png';
+import ecommerceLogin from '../assets/EZHome/login.png';
+import ecommerceSignup from '../assets/EZHome/sign-up.png';
+import ecommerceDashboard1 from '../assets/EZHome/dashpord1.png';
+import ecommerceDashboard2 from '../assets/EZHome/dashpord2.png';
+import ecommerceDashboard3 from '../assets/EZHome/dashpord3.png';
+import ecommerceDashboard4 from '../assets/EZHome/dashpord4.png';
+import ecommerceDashboard5 from '../assets/EZHome/dashpord5.png';
+import ecommerceFooter from '../assets/EZHome/foter.png';
 import companyPreview from '../assets/Jodran.png';
 import restaurantPreview from '../assets/restaurant.png';
 import amjadPreview from '../assets/amjad.png';
@@ -158,7 +173,24 @@ export const data = {
       purpose: 'Support the core shopping flow, from product browsing to cart and order management.',
       role: 'Backend development',
       features: ['Authentication', 'Product management', 'Cart and orders', 'Wishlist'],
-      images: [{ src: ecommercePreview, width: 1882, height: 873, alt: 'EZ-Home e-commerce website preview' }],
+      images: [
+        { src: ecommercePreview, group: 'Storefront', width: 1882, height: 873, alt: 'EZ-Home e-commerce website preview' },
+        { src: ecommerceProduct, group: 'Storefront', width: 1867, height: 870, alt: 'EZ-Home product page' },
+        { src: ecommerceWishlist, group: 'Storefront', width: 1887, height: 875, alt: 'EZ-Home wishlist' },
+        { src: ecommerceCart, group: 'Cart & checkout', width: 1896, height: 882, alt: 'EZ-Home shopping cart' },
+        { src: ecommerceCart1, group: 'Cart & checkout', width: 890, height: 761, alt: 'EZ-Home cart flow, view 1' },
+        { src: ecommerceCart2, group: 'Cart & checkout', width: 797, height: 666, alt: 'EZ-Home cart flow, view 2' },
+        { src: ecommerceCart3, group: 'Cart & checkout', width: 687, height: 576, alt: 'EZ-Home cart flow, view 3' },
+        { src: ecommerceLogin, group: 'Account', width: 920, height: 795, alt: 'EZ-Home login page' },
+        { src: ecommerceSignup, group: 'Account', width: 737, height: 831, alt: 'EZ-Home sign-up page' },
+        { src: ecommerceDashboard1, group: 'Dashboard', width: 1891, height: 873, alt: 'EZ-Home dashboard, view 1' },
+        { src: ecommerceDashboard2, group: 'Dashboard', width: 1902, height: 880, alt: 'EZ-Home dashboard, view 2' },
+        { src: ecommerceDashboard3, group: 'Dashboard', width: 1902, height: 867, alt: 'EZ-Home dashboard, view 3' },
+        { src: ecommerceDashboard4, group: 'Dashboard', width: 1912, height: 881, alt: 'EZ-Home dashboard, view 4' },
+        { src: ecommerceDashboard5, group: 'Dashboard', width: 1907, height: 865, alt: 'EZ-Home dashboard, view 5' },
+        { src: ecommerceFooter, group: 'Storefront', width: 1897, height: 877, alt: 'EZ-Home footer' },
+      ],
+      video: { src: ecommerceVideo, type: 'video/mp4' },
       image: ecommercePreview,
       desc: 'Backend ECommerce covering auth, products, cart, orders, and wishlist with security-first architecture.',
       tech: ['Node.js', 'Express', 'MongoDB', 'Redis', 'JWT'],

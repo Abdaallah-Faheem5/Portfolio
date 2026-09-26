@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { data } from '../../data/index.js';
 import styles from './ProjectDetails.module.css';
 
@@ -6,6 +6,10 @@ export default function ProjectDetails() {
   const match = window.location.pathname.match(/^\/projects\/([^/]+)\/?$/);
   const index = data.projects.findIndex((item) => item.slug === match?.[1]);
   const project = data.projects[index];
+  const [selectedGroup, setSelectedGroup] = useState(null);
+  const imageGroups = [...new Set(project?.images?.map((image) => image.group).filter(Boolean))];
+  const activeGroup = imageGroups.includes(selectedGroup) ? selectedGroup : imageGroups[0];
+  const visibleImages = imageGroups.length ? project.images.filter((image) => image.group === activeGroup) : project?.images;
 
   useEffect(() => {
     document.title = project ? `${project.title} | ${data.hero.name}` : `Project not found | ${data.hero.name}`;
@@ -31,7 +35,14 @@ export default function ProjectDetails() {
   return (
     <main className={styles.page}>
       <a className={styles.back} href="/#projects">← Back to projects</a>
-      <header className={styles.hero}>
+      <header className={`${styles.hero} ${project.video ? styles.videoHero : ''}`}>
+        {project.video && (
+          <video className={styles.video} autoPlay muted loop playsInline preload="auto" poster={project.image}
+            disablePictureInPicture disableRemotePlayback tabIndex={-1} aria-hidden="true">
+            <source src={project.video.src} type={project.video.type} />
+          </video>
+        )}
+        <div className={styles.heroContent}>
         <p className={styles.label}>PROJECT / {String(index + 1).padStart(2, '0')}</p>
         <h1 className={styles.title}>{project.title}</h1>
         <p className={styles.intro}>{project.shortDescription}</p>
@@ -40,13 +51,7 @@ export default function ProjectDetails() {
           {project.role && <div><dt>My role</dt><dd>{project.role}</dd></div>}
           <div><dt>Primary technologies</dt><dd>{project.tech.slice(0, 3).join(' / ')}</dd></div>
         </dl>
-        {project.video && (
-          <video className={styles.video} controls playsInline preload="none" poster={project.image} aria-label={`${project.title} demonstration`}>
-            <source src={project.video.src} type={project.video.type} />
-            {project.video.captions && <track kind="captions" src={project.video.captions} srcLang="en" label="English" default />}
-            <a href={project.video.src}>Download the project video</a>
-          </video>
-        )}
+        </div>
       </header>
 
       <section className={styles.section} aria-labelledby="overview-heading">
@@ -71,9 +76,17 @@ export default function ProjectDetails() {
       {project.images?.length > 0 && (
         <section className={styles.gallerySection} aria-labelledby="images-heading">
           <h2 id="images-heading" className={styles.sectionTitle}>A closer look</h2>
-          <div className={styles.gallery} data-count={project.images.length}>
-            {project.images.map((image) => (
-              <figure key={image.src}>
+          {imageGroups.length > 0 && (
+            <div className={styles.galleryFilters} role="group" aria-label="Screenshot categories">
+              {imageGroups.map((group) => (
+                <button key={group} type="button" aria-pressed={activeGroup === group} aria-controls="project-gallery"
+                  onClick={() => setSelectedGroup(group)}>{group}</button>
+              ))}
+            </div>
+          )}
+          <div id="project-gallery" className={styles.gallery}>
+            {visibleImages.map((image) => (
+              <figure key={image.src} className={image.width / image.height > 1.6 ? styles.wideImage : styles.compactImage}>
                 <img src={image.src} alt={image.alt} width={image.width} height={image.height} loading="lazy" decoding="async" />
               </figure>
             ))}
