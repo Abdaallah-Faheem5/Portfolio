@@ -303,6 +303,8 @@
 :global([data-theme='light']) .secondary { background: var(--surface-translucent); border-color: var(--rule-gold); }
 :global([data-theme='light']) .resume { font-size: .7rem; text-decoration: underline; text-decoration-color: var(--rule-gold); text-underline-offset: 6px; }
 :global([data-theme='light']) .visual { position: relative; }
+/* The physical device uses a left-to-right coordinate system in both languages. */
+:global([data-theme='light']) .laptop-stage { direction: ltr; }
 :global([data-theme='light']) .visual-label { padding-bottom: 12px; border-bottom: 1px solid var(--rule-gold); color: var(--gold-ink); letter-spacing: .12em; }
 :global([data-theme='light']) .laptop-anchor::after {
   content: ''; position: absolute; inset-block-end: 24px; inset-inline-end: 0;
@@ -319,5 +321,6 @@
 }
 @media (max-width: 768px) {
   :global([data-theme='light']) .hero::before { background: none; }
+  :global([data-theme='light']) .laptop-stage canvas { transform: scale(.88); transform-origin: center; }
   :global([data-theme='light']) .description { font-size: 1.1rem; }
 }
