@@ -1,5 +1,6 @@
 ﻿import { usePortfolio } from '../../context/Preferences.jsx';
 import styles from './Footer.module.css';
+import BrandMark from '../BrandMark.jsx';
 
 export default function Footer() {
   const { data, t, language } = usePortfolio();
@@ -10,7 +11,7 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={styles['footer-inner']}>
         <div className={styles.identity}>
-          <a dir="ltr" className={styles['footer-logo']} href="#hero" aria-label={t('Back to introduction')}>{data.branding.footer}</a>
+          <a dir="ltr" className={styles['footer-logo']} href="#hero" aria-label={t('Back to introduction')}><BrandMark label={data.branding.footer} /></a>
           <p className={styles.role}>{data.personal.title}</p>
         </div>
         <nav className={styles.socials} aria-label={t('Footer social links')}>

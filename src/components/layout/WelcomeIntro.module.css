@@ -1,39 +1,44 @@
-.content:focus { outline: none; }
-.intro {
-  position: fixed; inset: 0; z-index: 2000;
-  display: flex; flex-direction: column; justify-content: space-between;
-  padding: clamp(24px, 5vw, 64px);
-  background: var(--void); color: var(--text-primary);
-  overflow-y: auto; overscroll-behavior: contain;
-  transition: opacity 300ms ease, visibility 300ms ease;
-}
-.intro[data-leaving='true'] { opacity: 0; visibility: hidden; }
+﻿.content:focus { outline: none; }
+.intro { position: fixed; inset: 0; z-index: 2000; isolation: isolate; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(22px, 4vw, 52px); overflow: hidden; background: #08090b; color: #e5d3ad; color-scheme: dark; transition: opacity 800ms ease, visibility 800ms ease; }
+.intro[data-leaving='true'] { opacity: 0; visibility: hidden; pointer-events: none; }
+.cinema { position: absolute; inset: 0; z-index: -2; background: #08090b; }
+.film { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+.shade { position: absolute; inset: 0; background: #08090b; opacity: .08; transition: opacity 1.2s ease; }
+.intro[data-phase='welcome'] .shade, .intro[data-phase='leaving'] .shade { opacity: .88; }
+.backdrop, .seal, .eyebrow, .statement, .note { display: none; }
 .topline, .bottomline { display: flex; justify-content: space-between; align-items: center; gap: 24px; }
-.topline { padding-bottom: 20px; border-bottom: 1px solid var(--glass-border); }
-.brand { color: var(--gold-ink, var(--gold)); font: 700 1rem var(--font-code); }
-.edition { color: var(--text-secondary); font-size: .6rem; letter-spacing: .12em; text-align: end; }
-.identity { width: min(100%, 960px); margin: auto; padding-block: 60px; text-align: center; }
-.eyebrow { color: var(--gold-ink, var(--gold)); font-size: .7rem; letter-spacing: .18em; margin-bottom: 20px; }
-.name { font: 700 clamp(2.6rem, 7.5vw, 6.5rem)/1.15 var(--font-heading); letter-spacing: -.055em; overflow-wrap: anywhere; }
-.role { margin-top: 22px; color: var(--text-secondary); font-size: clamp(.7rem, 1.2vw, .9rem); }
-.rule { width: min(180px, 50%); height: 1px; background: var(--border); margin: 36px auto 24px; overflow: hidden; }
-.rule span { display: block; width: 100%; height: 100%; background: var(--gold); transform-origin: left; animation: reveal 2.2s var(--ease-snap) both; }
-.statement { color: var(--text-secondary); font-size: .8rem; line-height: 1.9; max-width: 44ch; margin-inline: auto; }
-.bottomline { padding-top: 16px; border-top: 1px solid var(--glass-border); }
-.note { font-size: .6rem; color: var(--text-secondary); }
-.skip { display: inline-flex; align-items: center; justify-content: center; gap: 18px; min-height: 44px; padding: 8px 12px; border: 1px solid var(--border); background: transparent; color: var(--text-primary); font: .7rem var(--font-body); cursor: pointer; }
-.skip:focus-visible { outline: 2px solid var(--focus-ring, var(--gold)); outline-offset: 4px; }
-@media (hover: hover) { .skip:hover { background: var(--surface-hover); border-color: var(--gold); } }
-:global([data-theme='light']) .intro { background: var(--hero-tonal); }
-:global([dir='rtl']) .rule span { transform-origin: right; }
-@keyframes reveal { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-@media (max-width: 480px) {
-  .edition { font-size: .5rem; max-width: 20ch; }
-  .bottomline { flex-wrap: wrap; gap: 12px; }
-  .note { max-width: 24ch; }
-  .statement { font-size: .72rem; }
+.topline { opacity: .7; }
+.brand { color: #e5d3ad; font: 700 .8rem var(--font-code); }
+.edition { color: #c5b38e; font-size: .55rem; letter-spacing: .16em; text-align: end; }
+.bottomline { justify-content: flex-end; }
+.identity { margin: auto; width: 100%; text-align: center; padding: 24px 0; }
+.name { color: #dcc08a; font: 400 clamp(2.6rem, 7.5vw, 7rem)/1.15 Georgia, 'Times New Roman', serif; letter-spacing: -.035em; text-shadow: 0 2px 40px #bd954429; }
+.firstName, .surname { display: inline-block; }
+.role { margin-top: 24px; font: 400 clamp(.65rem, 1.2vw, .85rem)/1.8 var(--font-body); letter-spacing: .25em; color: #c5b89b; }
+.rule { width: 110px; height: 1px; margin: 30px auto 0; background: linear-gradient(90deg, transparent, #b99451, transparent); }
+.rule span { display: none; }
+.intro[data-phase='riding'] .identity { opacity: 0; }
+.intro[data-phase='riding'] .identity * { animation-play-state: paused; }
+.skip { display: inline-flex; align-items: center; gap: 20px; min-height: 44px; padding: 10px 16px; border: 1px solid #b9945140; background: #08090b80; color: #ddcfb5; font: .65rem var(--font-body); cursor: pointer; }
+.skip:hover { border-color: #b99451; }
+.skip:focus-visible { outline: 2px solid #dcc08a; outline-offset: 5px; }
+.particles { position: absolute; inset: 0; pointer-events: none; z-index: -1; opacity: 0; transition: opacity 1s; }
+.intro[data-phase='welcome'] .particles { opacity: .65; }
+.particles i { position: absolute; left: var(--x); top: var(--y); width: 2px; height: 2px; border-radius: 50%; background: #d2af6c; box-shadow: 0 0 8px #be9148; animation: drift 3.8s var(--delay) linear infinite; }
+.intro[data-leaving='true'] .particles { transform: scale(1.4); opacity: 0; transition: transform 800ms ease, opacity 800ms ease; }
+@media (prefers-reduced-motion: no-preference) {
+  .firstName { animation: reveal 1300ms 120ms both; }
+  .surname { animation: reveal 1300ms 260ms both; }
+  .role { animation: reveal 1000ms 750ms both; }
+  .rule { animation: reveal 1000ms 950ms both; }
 }
-@media (prefers-reduced-motion: reduce) {
-  .intro { transition: none; }
-  .rule span { animation: none; }
+@keyframes reveal { from { opacity: 0; filter: blur(8px); transform: translateY(14px); } to { opacity: 1; filter: blur(0); transform: translateY(0); } }
+@keyframes drift { from { opacity: 0; transform: translate(20px, 25px); } 35% { opacity: .8; } to { opacity: 0; transform: translate(calc(-1 * var(--travel)), -70px); } }
+@media (max-width: 600px) {
+  .name { font-size: clamp(2.5rem, 11vw, 4rem); }
+  .firstName, .surname { display: block; }
+  .role { font-size: .6rem; letter-spacing: .15em; }
+  .edition { max-width: 22ch; font-size: .5rem; }
 }
+@media (max-height: 480px) { .name { font-size: 2.6rem; } .role { margin-top: 12px; } .rule { margin-top: 14px; } }
+@media (prefers-reduced-motion: reduce) { .cinema, .particles { display: none; } .intro { transition: none; } }

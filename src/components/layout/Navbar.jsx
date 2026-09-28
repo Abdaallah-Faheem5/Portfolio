@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { usePortfolio } from '../../context/Preferences.jsx';
 import styles from './Navbar.module.css';
 import PreferenceControls from './PreferenceControls.jsx';
+import BrandMark from '../BrandMark.jsx';
 
 export default function Navbar() {
   const { data, t } = usePortfolio();
@@ -79,7 +80,7 @@ export default function Navbar() {
     <nav ref={navRef} className={styles.navbar} aria-label={t('Primary navigation')} data-open={menuOpen}>
       <div className={styles.inner}>
         <a href="#hero" dir="ltr" className={styles.logo} onClick={closeMenu} aria-label={t('Back to introduction')}>
-          {data.branding.navbar}
+          <BrandMark label={data.branding.navbar} />
         </a>
 
         <button

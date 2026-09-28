@@ -1,0 +1,2 @@
+.mark { display: inline-flex; align-items: center; white-space: pre; direction: ltr; }
+.sword { display: block; width: .85em; height: 1.4em; margin-inline: .12em .06em; flex-shrink: 0; overflow: visible; }
