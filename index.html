@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>
     (() => {
-      let theme = 'dark', language = 'en';
+      let language = 'en';
       try {
-        if (localStorage.getItem('portfolio-theme') === 'light') theme = 'light';
+        localStorage.removeItem('portfolio-theme');
         if (localStorage.getItem('portfolio-language') === 'ar') language = 'ar';
       } catch {}
-      document.documentElement.dataset.theme = theme;
+      document.documentElement.dataset.theme = 'dark';
       document.documentElement.lang = language;
       document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
     })();

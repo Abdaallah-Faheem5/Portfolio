@@ -14,21 +14,19 @@ function translateContent(value, key) {
 const arabic = translateContent(english);
 
 export function PreferencesProvider({ children }) {
-  const [theme, setTheme] = useState(() => document.documentElement.dataset.theme === 'light' ? 'light' : 'dark');
   const [language, setLanguage] = useState(() => document.documentElement.lang === 'ar' ? 'ar' : 'en');
   useLayoutEffect(() => {
     const root = document.documentElement;
-    root.dataset.theme = theme;
+    root.dataset.theme = 'dark';
     root.lang = language;
     root.dir = language === 'ar' ? 'rtl' : 'ltr';
     window.dispatchEvent(new Event('resize'));
     try {
-      localStorage.setItem('portfolio-theme', theme);
       localStorage.setItem('portfolio-language', language);
     } catch { /* Preferences still work when browser storage is unavailable. */ }
-  }, [theme, language]);
+  }, [language]);
   const t = (text) => language === 'ar' ? ar[text] ?? text : text;
-  return <Preferences.Provider value={{ theme, setTheme, language, setLanguage, t, data: language === 'ar' ? arabic : english }}>{children}</Preferences.Provider>;
+  return <Preferences.Provider value={{ language, setLanguage, t, data: language === 'ar' ? arabic : english }}>{children}</Preferences.Provider>;
 }
 
 export const usePortfolio = () => useContext(Preferences);
