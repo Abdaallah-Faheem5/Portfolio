@@ -196,7 +196,8 @@ export const data = {
         { src: ecommerceCart, width: 1896, height: 882, alt: 'EZ-Home shopping cart' },
         { src: ecommerceCart1, width: 890, height: 761, alt: 'EZ-Home cart flow, view 1' },
         { src: ecommerceCart2, width: 797, height: 666, alt: 'EZ-Home cart flow, view 2' },
-        { src: ecommerceCart3, width: 687, height: 576, alt: 'EZ-Home cart flow, view 3' },
+        { src: ecommerceFooter, width: 1897, height: 877, alt: 'EZ-Home footer' },
+        
         { src: ecommerceLogin, width: 920, height: 795, alt: 'EZ-Home login page' },
         { src: ecommerceSignup, width: 737, height: 831, alt: 'EZ-Home sign-up page' },
         { src: ecommerceDashboard1, width: 1891, height: 873, alt: 'EZ-Home dashboard, view 1' },
@@ -204,7 +205,7 @@ export const data = {
         { src: ecommerceDashboard3, width: 1902, height: 867, alt: 'EZ-Home dashboard, view 3' },
         { src: ecommerceDashboard4, width: 1912, height: 881, alt: 'EZ-Home dashboard, view 4' },
         { src: ecommerceDashboard5, width: 1907, height: 865, alt: 'EZ-Home dashboard, view 5' },
-        { src: ecommerceFooter, width: 1897, height: 877, alt: 'EZ-Home footer' },
+        { src: ecommerceCart3, width: 487, height: 376, alt: 'EZ-Home cart flow, view 3' },
       ],
       video: { src: ecommerceVideo, type: 'video/mp4' },
       image: ecommercePreview,
