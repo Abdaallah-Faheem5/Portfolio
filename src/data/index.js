@@ -109,10 +109,10 @@ export const data = {
     {
       icon: 'BE',
       name: 'Backend',
-      desc: 'Node.js - Express - REST APIs',
+      desc: 'ASP.NET Core - Node.js - Express - REST APIs',
       level: 95,
       span: '2x1',
-      tags: ['Node.Js', 'Express.Js'],
+      tags: ['ASP.NET Core', 'Node.Js', 'Express.Js'],
     },
     {
       icon: 'FE',
@@ -137,15 +137,15 @@ export const data = {
       desc: 'Git - GitHub - VS Code - Postman - NPM',
       level: 88,
       span: '1x1',
-      tags: [], 
+      tags: ['Git', 'GitHub', 'VS Code', 'Postman', 'NPM'], 
     },
     {
       icon: 'JV',
-      name: 'language programming ',
-      desc: 'Java - Javascript - Typescript',
+      name: 'Language Programming',
+      desc: 'C# - Java - Javascript - Typescript',
       level: 85,
       span: '1x1',
-      tags: ['JAVA', 'JS', 'TS'],
+      tags: ['C#', 'JAVA', 'JS', 'TS'],
     },
 
   ],
