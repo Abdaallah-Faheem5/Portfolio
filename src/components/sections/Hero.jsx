@@ -147,7 +147,7 @@ export default function Hero() {
               <a
                 href={cvUrl}
                 className={styles.resume}
-                download="Abdalah-Faheem-CV.pdf"
+                download="Abdallah-Faheem-CV.pdf"
               >
                 {data.hero.cvLabel}<span aria-hidden="true">{language === 'ar' ? '\u2196' : '\u2197'}</span>
               </a>

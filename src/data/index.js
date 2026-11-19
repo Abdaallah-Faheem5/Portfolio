@@ -1,4 +1,4 @@
-import cvFile from '../assets/CV.pdf';
+import cvFile from '../assets/Abdallah.pdf';
 import ecommercePreview from '../assets/EZHome/EZ-Home.png';
 import ecommerceVideo from '../assets/EZHome/Ez-Home.mp4';
 import ecommerceProduct from '../assets/EZHome/product.png';
